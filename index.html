@@ -1,124 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>5 Brother's Fitness Suplliment Store s</title>
-
-<style>
-
-body
-  <!DOCTYPE html>
-<html lang="en">
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>5 Brother's Fitness Supplement Store</title>
-    
     <style>
+        /* Premium Dark Gym Theme */
         body {
             margin: 0;
-            font-family: Arial, sans-serif;
-            background: #0d0d0d;
-            color: white;
+            font-family: 'Arial', sans-serif;
+            background-color: #0d0d0d;
+            color: #ffffff;
+            padding-bottom: 40px;
         }
 
         header {
-            background: black;
+            background: #000000;
             padding: 20px;
             text-align: center;
-            border-bottom: 2px solid gold;
+            border-bottom: 3px solid #ffcc00;
         }
 
         header h1 {
-            color: gold;
+            color: #ffcc00;
             margin: 0;
-            font-size: 32px;
+            font-size: 26px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .search-box {
             text-align: center;
-            margin: 20px;
+            margin: 25px 10px;
         }
 
         .search-box input {
             width: 90%;
-            max-width: 400px;
-            padding: 12px;
-            border-radius: 10px;
-            border: none;
+            max-width: 500px;
+            padding: 14px;
+            border-radius: 8px;
+            border: 1px solid #333;
+            background-color: #1a1a1a;
+            color: white;
             font-size: 16px;
         }
 
+        /* Responsive Grid Layout for Equal Cards */
         .catalog {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 0 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .supplement-card {
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 10px;
-            padding: 15px;
+            background: #141414;
+            border: 1px solid #262626;
+            border-radius: 12px;
+            padding: 20px;
             text-align: center;
-            width: 250px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.7);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.2s;
+        }
+
+        .supplement-card:hover {
+            transform: translateY(-5px);
+            border-color: #ffcc00;
+        }
+
+        .image-container {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            background: #1f1f1f;
+            border-radius: 8px;
+            padding: 10px;
         }
 
         .supplement-card img {
-            border-radius: 8px;
-            object-fit: cover;
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+            border-radius: 6px;
         }
 
         .supplement-card h2 {
-            font-size: 20px;
-            margin: 10px 0;
-            color: gold;
+            font-size: 19px;
+            margin: 10px 0 5px 0;
+            color: #ffffff;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .tag {
-            background: gold;
-            color: black;
+            background: #ffcc00;
+            color: #000000;
             display: inline-block;
-            padding: 4px 10px;
+            padding: 4px 12px;
             font-weight: bold;
-            border-radius: 5px;
-            font-size: 12px;
-            margin: 5px 0;
+            border-radius: 4px;
+            font-size: 11px;
+            text-transform: uppercase;
+            margin: 5px auto;
+            width: fit-content;
+        }
+
+        .features {
+            text-align: left;
+            font-size: 13px;
+            color: #b3b3b3;
+            margin: 10px 0;
+            padding-left: 15px;
+        }
+
+        .features li {
+            margin-bottom: 4px;
         }
 
         .price {
-            font-size: 18px;
+            font-size: 22px;
             font-weight: bold;
-            color: #fff;
-            margin: 10px 0;
+            color: #ffcc00;
+            margin: 15px 0;
         }
 
-        button {
-            background: gold;
-            color: black;
-            border: none;
-            padding: 10px 20px;
+        /* Call/Buy Button Styling */
+        .buy-btn {
+            background: #ffcc00;
+            color: #000000;
+            text-decoration: none;
+            padding: 12px;
             font-size: 16px;
             font-weight: bold;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
+            border-radius: 6px;
+            display: block;
             transition: 0.3s;
+            text-transform: uppercase;
+            border: none;
+            cursor: pointer;
         }
 
-        button:hover {
-            background: white;
+        .buy-btn:hover {
+            background: #ffffff;
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>5 BROTHER'S FITNESS SUPPLEMENT STORE</h1>
+        <h1>5 Brother's Fitness Supplement Store</h1>
     </header>
 
     <div class="search-box">
@@ -128,227 +167,51 @@ body
     <section class="catalog">
         
         <div class="supplement-card">
-            <img src="https://i.ibb.co/Fb3RymGS/100-Whey-Choc-500-Side2-1200x.jpg" width="90" alt="Whey Protein">
-            <h2>Whey Protein</h2>
-            <p class="tag">Best Seller</p>
-            <p class="price">₹3699/-</p>
-            <button>Buy Now</button>
+            <div class="image-container">
+                <img src="https://i.ibb.co/8nx0S7xY/download.webp" alt="MuscleBlaze Creatine Monohydrate">
+            </div>
+            <h2>MB Creatine Monohydrate</h2>
+            <p class="tag">Verified Product</p>
+            <ul class="features">
+                <li>Helps Increase Strength</li>
+                <li>Faster Recovery</li>
+                <li>Original & Verified</li>
+            </ul>
+            <p class="price">320g • ₹1199/-</p>
+            <a href="tel:919140411808" class="buy-btn">Call to Buy</a>
         </div>
 
         <div class="supplement-card">
-            <img src="https://i.ibb.co/8nx0S7xY/download.webp" width="90" alt="Mass Gainer">
-            <h2>Mass Gainer</h2>
+            <div class="image-container">
+                <img src="https://i.ibb.co/Fb3RymGS/100-Whey-Choc-500-Side2-1200x.jpg" alt="Labrada Mass Gainer">
+            </div>
+            <h2>Labrada Mass Gainer</h2>
             <p class="tag">Best Gainer</p>
-            <p class="price">₹2999/-</p>
-            <button>Buy Now</button>
+            <ul class="features">
+                <li>High Quality Mass Gainer</li>
+                <li>Muscle Growth & Recovery</li>
+                <li>100% Authentic</li>
+            </ul>
+            <p class="price">₹3000/-</p>
+            <a href="tel:919140411808" class="buy-btn">Call to Buy</a>
+        </div>
+
+        <div class="supplement-card">
+            <div class="image-container">
+                <img src="https://i.ibb.co/Fb3RymGS/100-Whey-Choc-500-Side2-1200x.jpg" alt="100% Whey Protein">
+            </div>
+            <h2>100% Whey Protein</h2>
+            <p class="tag">Best Seller</p>
+            <ul class="features">
+                <li>Premium Protein Source</li>
+                <li>Lean Muscle Building</li>
+                <li>Great Taste & Mixability</li>
+            </ul>
+            <p class="price">₹3699/-</p>
+            <a href="tel:919140411808" class="buy-btn">Call to Buy</a>
         </div>
 
     </section>
-
-</body>
-</html>
-
-  
-}
-
-header{
-background:black;
-padding:20px;
-text-align:center;
-border-bottom:2px solid gold;
-}
-
-header h1{
-color:gold;
-margin:0;
-font-size:32px;
-}
-
-.search-box{
-text-align:center;
-margin:20px;
-}
-
-.search-box input{
-width:90%;
-max-width:400px;
-padding:12px;
-border-radius:10px;
-border:none;
-font-size:16px;
-}
-
-.products{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
-gap:20px;
-padding:20px;
-}
-
-.card{
-background:#1a1a1a;
-padding:15px;
-border-radius:15px;
-box-shadow:0 0 10px rgba(255,215,0,0.3);
-transition:0.3s;
-}
-
-.card:hover{
-transform:scale(1.03);
-}
-
-.card img{
-width:100%;
-border-radius:10px;
-}
-
-.card h2{
-font-size:20px;
-margin-top:10px;
-color:gold;
-}
-
-.price{
-font-size:22px;
-margin:10px 0;
-}
-
-.verify{
-background:green;
-display:inline-block;
-padding:6px 12px;
-border-radius:8px;
-font-size:14px;
-}
-
-.contact{
-margin-top:15px;
-display:inline-block;
-background:gold;
-color:black;
-padding:10px 15px;
-border-radius:10px;
-text-decoration:none;
-font-weight:bold;
-}
-
-footer{
-text-align:center;
-padding:20px;
-border-top:2px solid gold;
-margin-top:20px;
-}
-
-</style>
-
-</head>
-
-<body>
-
-<header>
-<h1>5 Brother's Fitness</h1>
-<p>Verified Supplement Store</p>
-</header>
-
-<div class="search-box">
-<input type="text" id="search" placeholder="Search Products..." onkeyup="searchProducts()">
-</div>
-
-<div class="products" id="productList">
-
-<div class="card">
-
-<img src="https://i.ibb.co/hvDTM6H/prd-3979255-Muscle-Blaze-Creatine-Monohydrate-Cre-AMP-0-71-lb-Watermelon-Kool-Aid-o.jpg">
-
-<h2>MuscleBlaze Creatine Monohydrate</h2>
-
-<div class="price">₹1000</div>
-
-<p>302g • Watermelon Kool Aid Flavor</p>
-
-<p>✔ Helps Increase Strength</p>
-
-<p>✔ Faster Recovery</p>
-
-<p>✔ Original & Verified Product</p>
-
-<div class="verify">✅ Verified Product</div><br>
-
-<a class="contact" href="tel:9990954574">Call Now</a>
-
-</div>
-
-
-<div class="supplement-card">
-
-
-
-  <h2>Labrada Mass Gainer n</h2>
-
-  <p>High quality Mass Gainer for muscle Mass growth and recovery.</p>
-
-  <button>3000 Only Buy Now</button>
-
-  <div class="verify">✅ Verified Product</div><br>
-
-<a class="contact" href="tel:9990954574">Call Now</a>
-
-</div>
-
-</div>
-<div class="card">
-<img src="https://i.imgur.com/JRbRL8x.png">
-<h2>BlackBeast Big Daddy Inferno Pre Workout</h2>
-<div class="price">₹1199</div>
-<div class="verify">✅ Verified Product</div><br>
-<a class="contact" href="tel:9140417259">Call Now</a>
-</div>
-
-<<div class="supplement-card">
-
-<img src="https://i.ibb.co/8nx8S7xY/download.webp">
-
-<h2>Whey Protein</h2>
-
-<p class="tag">Best Whey Protein</p>
-
-<p class="price">₹3699</p>
-
-<p>Perfect for Muscle Building and Strength.</p>
-
-<button>Buy Now</button>
-
-</div>
-
-</div>
-
-<footer>
-<p>Owner: Saurabh Singh Chandel</p>
-<p>Contact: 9140417259</p>
-<p>Location: Umrao Khera Akrampur Unnao</p>
-</footer>
-
-<script>
-
-function searchProducts() {
-let input = document.getElementById('search').value.toLowerCase();
-let cards = document.getElementsByClassName('card');
-
-for(let i = 0; i < cards.length; i++) {
-
-let title = cards[i].getElementsByTagName('h2')[0];
-
-if(title.innerHTML.toLowerCase().indexOf(input) > -1){
-cards[i].style.display = "";
-}
-else{
-cards[i].style.display = "none";
-}
-
-}
-}
-
-</script>
 
 </body>
 </html>
