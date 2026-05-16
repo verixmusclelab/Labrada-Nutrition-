@@ -7,44 +7,148 @@
 
 <style>
 
-body{
-<section class="catalog">
+body
+  <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5 Brother's Fitness Supplement Store</title>
+    
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #0d0d0d;
+            color: white;
+        }
 
-<h1>OUR SUPPLEMENTS</h1>
+        header {
+            background: black;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid gold;
+        }
 
-<div class="supplement-card">
+        header h1 {
+            color: gold;
+            margin: 0;
+            font-size: 32px;
+        }
 
-<img src="https://i.ibb.co/Fb3RywGS/100-Whey-Choc-500-Side2-1200x.jpg" width="90">
+        .search-box {
+            text-align: center;
+            margin: 20px;
+        }
 
-<h2>Whey Protein</h2>
+        .search-box input {
+            width: 90%;
+            max-width: 400px;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            font-size: 16px;
+        }
 
-<p class="tag">Best Seller</p>
+        .catalog {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+        }
 
-<p class="price">₹3699</p>
+        .supplement-card {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            width: 250px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.5);
+        }
 
-<button>Buy Now</button>
+        .supplement-card img {
+            border-radius: 8px;
+            object-fit: cover;
+        }
 
-</div>
+        .supplement-card h2 {
+            font-size: 20px;
+            margin: 10px 0;
+            color: gold;
+        }
 
+        .tag {
+            background: gold;
+            color: black;
+            display: inline-block;
+            padding: 4px 10px;
+            font-weight: bold;
+            border-radius: 5px;
+            font-size: 12px;
+            margin: 5px 0;
+        }
 
-<div class="supplement-card">
+        .price {
+            font-size: 18px;
+            font-weight: bold;
+            color: #fff;
+            margin: 10px 0;
+        }
 
-<img src="https://i.ibb.co/8nx8S7xY/download.webp" width="90">
+        button {
+            background: gold;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            transition: 0.3s;
+        }
 
-<h2>Mass Gainer</h2>
+        button:hover {
+            background: white;
+        }
+    </style>
+</head>
+<body>
 
-<p class="tag">Best Gainer</p>
+    <header>
+        <h1>5 BROTHER'S FITNESS SUPPLEMENT STORE</h1>
+    </header>
 
-<p class="price">₹2999</p>
+    <div class="search-box">
+        <input type="text" placeholder="Search supplements...">
+    </div>
 
-<button>Buy Now</button>
+    <section class="catalog">
+        
+        <div class="supplement-card">
+            <img src="https://i.ibb.co/Fb3RymGS/100-Whey-Choc-500-Side2-1200x.jpg" width="90" alt="Whey Protein">
+            <h2>Whey Protein</h2>
+            <p class="tag">Best Seller</p>
+            <p class="price">₹3699/-</p>
+            <button>Buy Now</button>
+        </div>
 
-</div>
+        <div class="supplement-card">
+            <img src="https://i.ibb.co/8nx0S7xY/download.webp" width="90" alt="Mass Gainer">
+            <h2>Mass Gainer</h2>
+            <p class="tag">Best Gainer</p>
+            <p class="price">₹2999/-</p>
+            <button>Buy Now</button>
+        </div>
 
-</section>margin:0;
-font-family:Arial;
-background:#0d0d0d;
-color:white;
+    </section>
+
+</body>
+</html>
+
+  
 }
 
 header{
