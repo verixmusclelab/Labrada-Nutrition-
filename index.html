@@ -29,7 +29,7 @@
             letter-spacing: 1px;
         }
 
-        /* Full Screen OVERLAY - Smoothly resets now */
+        /* Full Screen OVERLAY - Scan karne par sabse pehle khulega */
         #verification-overlay {
             position: fixed;
             top: 0;
@@ -44,7 +44,6 @@
             text-align: center;
             padding: 20px;
             box-sizing: border-box;
-            pointer-events: auto; /* Controls freeze bugs */
         }
 
         .verify-card {
@@ -82,6 +81,7 @@
             text-transform: uppercase;
         }
 
+        /* Red Warning Title Style */
         .verify-card .warning-title {
             color: #ff3333;
             font-size: 28px;
@@ -99,6 +99,7 @@
         .verify-desc { color: #ffffff; font-size: 18px; margin: 0 0 25px 0; line-height: 1.4; }
         .redirect-loader { font-size: 14px; color: #888; }
 
+        /* Try Again Button Style */
         .try-again-btn {
             background: #ff3333;
             color: #ffffff;
@@ -526,4 +527,4 @@
             let desc = document.getElementById('dynamic-desc');
             let loader = document.getElementById('loader-box');
             let btnContainer = document.getElementById('button-container');
-            let overlay = document.getElementById('verification-ove
+            let overlay = document.get
