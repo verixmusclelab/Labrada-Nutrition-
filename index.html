@@ -22,7 +22,6 @@
             background-color: var(--bg-dark);
             color: var(--text-main);
             padding-bottom: 60px;
-            -webkit-font-smoothing: antialiased;
         }
 
         /* Top Announcement Bar */
@@ -37,7 +36,6 @@
             letter-spacing: 1px;
         }
 
-        /* Main Premium Header */
         header {
             background: #000000;
             padding: 25px 20px;
@@ -58,7 +56,7 @@
             color: var(--primary);
         }
 
-        /* US Supplements Style Premium Navigation Tabs */
+        /* Navigation Tabs Layout */
         .category-nav {
             display: flex;
             justify-content: center;
@@ -81,7 +79,6 @@
             cursor: pointer;
             transition: all 0.2s ease;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
         .category-btn:hover, .category-btn.active {
@@ -99,7 +96,7 @@
             color: #000000;
         }
 
-        /* Clean Layout Grid */
+        /* Product Cards Grid */
         .catalog {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -110,24 +107,16 @@
         }
 
         .product-section { display: none; }
-        .product-section.active-section { display: grid; }
+        .product-section.active-section { display: grid !important; }
 
-        /* Premium E-Commerce Product Cards */
         .supplement-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 0px;
             padding: 25px;
             text-align: center;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-        
-        .supplement-card:hover {
-            transform: translateY(-5px);
-            border-color: #444444;
         }
 
         .image-container {
@@ -155,7 +144,6 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            line-height: 1.4;
         }
 
         .tag {
@@ -168,7 +156,6 @@
             font-size: 11px;
             text-transform: uppercase;
             margin: 5px auto 15px auto;
-            letter-spacing: 0.5px;
         }
 
         .features { 
@@ -177,10 +164,7 @@
             color: var(--text-muted); 
             margin: 0 0 20px 0; 
             padding-left: 20px;
-            line-height: 1.6;
         }
-        
-        .features li { margin-bottom: 6px; }
         
         .price { 
             font-size: 24px; 
@@ -191,7 +175,6 @@
             padding-top: 15px;
         }
 
-        /* Elegant Purchase Button */
         .buy-btn {
             background: var(--primary);
             color: #000000;
@@ -201,12 +184,6 @@
             font-weight: 700;
             display: block;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            transition: background 0.2s ease;
-        }
-        
-        .buy-btn:hover {
-            background: var(--primary-hover);
         }
 
         /* Manual Verification Form Section */
@@ -219,20 +196,6 @@
             text-align: center;
         }
 
-        .verify-input-section h3 { 
-            color: var(--primary); 
-            margin-top: 0; 
-            font-size: 20px;
-            text-transform: uppercase; 
-            letter-spacing: 1px;
-        }
-        
-        .verify-input-section p {
-            color: var(--text-muted);
-            font-size: 13px;
-            margin-bottom: 25px;
-        }
-
         .verify-input-section input {
             width: 85%;
             padding: 14px;
@@ -243,12 +206,6 @@
             text-align: center;
             margin-bottom: 20px;
             text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .verify-input-section input:focus {
-            outline: none;
-            border-color: var(--primary);
         }
 
         .verify-action-btn {
@@ -261,10 +218,9 @@
             cursor: pointer;
             width: 92%;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
 
-        /* Full Screen Error Security Overlay */
+        /* Full Screen Error Security Overlay - CRITICAL FIXED DESIGN */
         #verification-overlay {
             position: fixed;
             top: 0;
@@ -272,8 +228,8 @@
             width: 100%;
             height: 100%;
             background: #000000;
-            z-index: -1;
-            display: none;
+            z-index: -1; /* Piche lock rehna chahiye default state mein */
+            display: none; 
             align-items: center;
             justify-content: center;
             text-align: center;
@@ -287,28 +243,12 @@
             border: 2px solid #ff3333;
             width: 100%;
             max-width: 450px;
-            box-sizing: border-box;
-            animation: popIn 0.4s ease-out;
         }
 
-        @keyframes popIn {
-            0% { transform: scale(0.9); opacity: 0; }
-            100% { transform: scale(1); opacity: 1; }
-        }
-
-        .verify-card .warning-title {
-            color: #ff3333;
-            font-size: 26px;
-            font-weight: 800;
-            display: block;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
+        .warning-title { color: #ff3333; font-size: 26px; font-weight: 800; display: block; margin-bottom: 20px; text-transform: uppercase; }
         .fail-badge { font-size: 70px; margin-bottom: 15px; }
         .verify-status-fail { color: #ff3333; font-size: 22px; font-weight: 700; text-transform: uppercase; margin-bottom: 12px; }
-        .verify-desc { color: #ffffff; font-size: 15px; margin: 0 0 30px 0; line-height: 1.5; }
+        .verify-desc { color: #ffffff; font-size: 15px; margin: 0 0 30px 0; }
 
         .try-again-btn {
             background: #ff3333;
@@ -320,7 +260,6 @@
             cursor: pointer;
             width: 100%;
             text-transform: uppercase;
-            letter-spacing: 1px;
         }
     </style>
 </head>
@@ -356,7 +295,7 @@
     <section id="whey" class="catalog product-section active-section">
         <div class="supplement-card">
             <div class="image-container">
-                <img src="https://i.ibb.co/V7X9pYhF/gnc-whey-supreme.jpg" alt="GNC Pro Performance Whey">
+                <img src="https://i.ibb.co/V7X9pYhF/gnc-whey-supreme.jpg" alt="GNC Whey">
             </div>
             <h2>GNC Pro Performance 100% Whey Protein</h2>
             <p class="tag">Chocolate Supreme</p>
@@ -446,7 +385,7 @@
 
         <div class="supplement-card">
             <div class="image-container">
-                <img src="https://i.ibb.co/gL0mPzZz/71-Uunvks2-SL-SL1500.jpg" alt="Avatar Whey Protein">
+                <img src="https://i.ibb.co/gL0mPzZz/71-Uunvks2-SL-SL1500.jpg" alt="Avatar Whey">
             </div>
             <h2>Avatar 100% Whey Protein Isolate</h2>
             <p class="tag">Rich Chocolate</p>
@@ -478,7 +417,7 @@
 
         <div class="supplement-card">
             <div class="image-container">
-                <img src="https://i.ibb.co/vv3V6zxX/IMG-20260517-141925.jpg" alt="GNC Creatine Official">
+                <img src="https://i.ibb.co/vv3V6zxX/IMG-20260517-141925.jpg" alt="GNC Creatine">
             </div>
             <h2>GNC Creatine Monohydrate</h2>
             <p class="tag">Pure Micronized</p>
@@ -550,15 +489,59 @@
 
     <script>
         const secureDatabase = {
-            "lbr7f29k": { brand: "Labrada Nutrition", tab: "whey" },
-            "tru5mp91": { brand: "Muscletech Nutrition", tab: "whey" },
-            "la24x8q2": { brand: "Ultimate Nutrition", tab: "whey" },
-            "mpn84k2l": { brand: "ON Gold Standard", tab: "whey" },
-            "mbz9x14a": { brand: "MuscleBlaze Nutrition", tab: "creatine" },
-            "gnc3m78b": { brand: "GNC Nutrition", tab: "creatine" },
-            "gnc5w84p": { brand: "GNC Pro Performance Whey", tab: "whey" }, /* NEW DATABASE CODE ADDED */
-            "wel4c8t2": { brand: "Wellcore Nutrition", tab: "creatine" },
-            "lmg5p62c": { brand: "Labrada Mass Gainer", tab: "gainer" },
-            "mon8k43d": { brand: "Monster Mass Gainer", tab: "gainer" },
-            "mbw7x92k": { brand: "MuscleBlaze Biozyme Whey", tab: "whey" },
-            "avt5p31m": { brand: "Avatar Whey Pr
+            "lbr7f29k": { tab: "whey" },
+            "tru5mp91": { tab: "whey" },
+            "la24x8q2": { tab: "whey" },
+            "mpn84k2l": { tab: "whey" },
+            "mbz9x14a": { tab: "creatine" },
+            "gnc3m78b": { tab: "creatine" },
+            "gnc5w84p": { tab: "whey" },
+            "wel4c8t2": { tab: "creatine" },
+            "lmg5p62c": { tab: "gainer" },
+            "mon8k43d": { tab: "gainer" },
+            "mbw7x92k": { tab: "whey" },
+            "avt5p31m": { tab: "whey" }
+        };
+
+        function filterCategory(categoryName) {
+            let buttons = document.getElementsByClassName('category-btn');
+            for (let button of buttons) { button.classList.remove('active'); }
+            
+            let sections = document.getElementsByClassName('product-section');
+            for (let section of sections) { section.classList.remove('active-section'); }
+            
+            if (categoryName === 'whey') document.getElementById('btn-whey').classList.add('active');
+            else if (categoryName === 'creatine') document.getElementById('btn-creatine').classList.add('active');
+            else if (categoryName === 'gainer') document.getElementById('btn-gainer').classList.add('active');
+            else if (categoryName === 'manual-verify') document.getElementById('btn-manual').classList.add('active');
+
+            document.getElementById(categoryName).classList.add('active-section');
+        }
+
+        function runVerificationProcess(inputCode) {
+            let code = inputCode.toLowerCase().trim();
+            let overlay = document.getElementById('verification-overlay');
+
+            if (secureDatabase[code]) {
+                overlay.style.display = 'none'; 
+                overlay.style.zIndex = "-1";
+                filterCategory(secureDatabase[code].tab);
+            } else {
+                overlay.style.zIndex = "99999";
+                overlay.style.display = 'flex';
+            }
+        }
+
+        function resetFailOverlay() {
+            let overlay = document.getElementById('verification-overlay');
+            overlay.style.display = 'none';
+            overlay.style.zIndex = "-1";
+            filterCategory('manual-verify');
+            let inputField = document.getElementById('manualCodeInput');
+            inputField.value = "";
+            inputField.focus();
+        }
+
+        function triggerManualCheck() {
+            let inputField = document.getElementById('manualCodeInput');
+            if(inputField.value.trim() === "") { alert("Please type a valid cod
