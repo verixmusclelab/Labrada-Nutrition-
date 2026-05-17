@@ -99,6 +99,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            gap: 10px; /* Space between front and back images */
             margin-bottom: 15px;
             background: #1f1f1f;
             border-radius: 8px;
@@ -107,7 +108,7 @@
 
         .supplement-card img {
             max-height: 100%;
-            max-width: 100%;
+            max-width: 48%; /* Adjusted to fit two images side-by-side if available */
             object-fit: contain;
             border-radius: 6px;
         }
@@ -191,9 +192,9 @@
         
         <div class="supplement-card">
             <div class="image-container">
-                <img src="https://i.ibb.co/ynbr1YCw/download-1.webp" alt="Muscletech Nitrotech Whey Protein">
+                <img src="https://i.ibb.co/ynbr1YCw/download-1.webp" alt="Muscletech Nitrotech Whey Protein" style="max-width: 100%;">
             </div>
-            <h2>Labrada Pro Whey Protein</h2>
+            <h2>Muscletech Whey Protein</h2>
             <p class="tag">Premium Quality</p>
             <ul class="features">
                 <li>Nitrotech Performance Series</li>
@@ -206,9 +207,9 @@
 
         <div class="supplement-card">
             <div class="image-container">
-                <img src="https://i.ibb.co/MyLYJcjV/HVPM75-X4-2.jpg" alt="Ultimate Nutrition Pro Star Whey">
+                <img src="https://i.ibb.co/MyLYJcjV/HVPM75-X4-2.jpg" alt="Ultimate Nutrition Pro Star Whey" style="max-width: 100%;">
             </div>
-            <h2>Muscletech Whey Protein</h2>
+            <h2>Ultimate Pro Whey Protein</h2>
             <p class="tag">Best Recovery</p>
             <ul class="features">
                 <li>Prostar 100% Whey</li>
@@ -221,7 +222,7 @@
 
         <div class="supplement-card">
             <div class="image-container">
-                <img src="https://i.ibb.co/ynbr1YCw/download-1.webp" alt="ON Gold Standard Whey">
+                <img src="https://i.ibb.co/ynbr1YCw/download-1.webp" alt="ON Gold Standard Whey" style="max-width: 100%;">
             </div>
             <h2>ON Gold Whey Protein</h2>
             <p class="tag">Top Seller</p>
@@ -236,16 +237,17 @@
 
         <div class="supplement-card">
             <div class="image-container">
-                <img src="https://i.ibb.co/ynbr1YCw/download-1.webp" alt="Labrada Whey Protein">
+                <img src="https://i.ibb.co/8nP9m7jP/IMG-20260517-053830.jpg" alt="Labrada Whey Protein Front">
+                <img src="https://i.ibb.co/5gGsY2pf/IMG-20260517-053845.jpg" alt="Labrada Whey Protein Back">
             </div>
             <h2>Labrada Whey Protein</h2>
-            <p class="tag">100% Authentic</p>
+            <p class="tag">Made in USA</p>
             <ul class="features">
                 <li>Premium Protein Source</li>
                 <li>Muscle Growth Support</li>
                 <li>Delicious Taste</li>
             </ul>
-            <p class="price">₹3699/-</p>
+            <p class="price">₹4200/-</p>
             <a href="tel:9990954574" class="buy-btn">Call to Buy</a>
         </div>
 
@@ -255,7 +257,7 @@
         
         <div class="supplement-card">
             <div class="image-container">
-                <img src="https://i.ibb.co/hvDTM6H/prd-3979255-Muscle-Blaze-Creatine-Monohydrate-Cre-AMP-0-71-lb-Watermelon-Kool-Aid-o.jpg" alt="MuscleBlaze Creatine Monohydrate">
+                <img src="https://i.ibb.co/hvDTM6H/prd-3979255-Muscle-Blaze-Creatine-Monohydrate-Cre-AMP-0-71-lb-Watermelon-Kool-Aid-o.jpg" alt="MuscleBlaze Creatine Monohydrate" style="max-width: 100%;">
             </div>
             <h2>MuscleBlaze Creatine Monohydrate</h2>
             <p class="tag">CreAMP Certified</p>
@@ -270,7 +272,7 @@
 
         <div class="supplement-card">
             <div class="image-container">
-                <img src="https://i.ibb.co/hvDTM6H/prd-3979255-Muscle-Blaze-Creatine-Monohydrate-Cre-AMP-0-71-lb-Watermelon-Kool-Aid-o.jpg" alt="GNC Creatine Monohydrate">
+                <img src="https://i.ibb.co/hvDTM6H/prd-3979255-Muscle-Blaze-Creatine-Monohydrate-Cre-AMP-0-71-lb-Watermelon-Kool-Aid-o.jpg" alt="GNC Creatine Monohydrate" style="max-width: 100%;">
             </div>
             <h2>GNC Creatine Monohydrate</h2>
             <p class="tag">Pure Micronized</p>
@@ -285,7 +287,7 @@
 
         <div class="supplement-card">
             <div class="image-container">
-                <img src="https://i.ibb.co/hvDTM6H/prd-3979255-Muscle-Blaze-Creatine-Monohydrate-Cre-AMP-0-71-lb-Watermelon-Kool-Aid-o.jpg" alt="Muscletech Platinum Creatine">
+                <img src="https://i.ibb.co/hvDTM6H/prd-3979255-Muscle-Blaze-Creatine-Monohydrate-Cre-AMP-0-71-lb-Watermelon-Kool-Aid-o.jpg" alt="Muscletech Platinum Creatine" style="max-width: 100%;">
             </div>
             <h2>Muscletech Creatine Monohydrate</h2>
             <p class="tag">Platinum Series</p>
@@ -304,7 +306,7 @@
         
         <div class="supplement-card">
             <div class="image-container">
-                <img src="https://i.ibb.co/sJjstZh7/Gainer-Choc-1-K-Front-1200x.jpg" alt="Labrada Mass Gainer">
+                <img src="https://i.ibb.co/sJjstZh7/Gainer-Choc-1-K-Front-1200x.jpg" alt="Labrada Mass Gainer" style="max-width: 100%;">
             </div>
             <h2>Labrada Mass Gainer</h2>
             <p class="tag">Best Gainer</p>
@@ -319,7 +321,7 @@
 
         <div class="supplement-card">
             <div class="image-container">
-                <img src="https://i.ibb.co/sJjstZh7/Gainer-Choc-1-K-Front-1200x.jpg" alt="Monster Mass Gainer">
+                <img src="https://i.ibb.co/sJjstZh7/Gainer-Choc-1-K-Front-1200x.jpg" alt="Monster Mass Gainer" style="max-width: 100%;">
             </div>
             <h2>Monster Mass Gainer</h2>
             <p class="tag">Heavy Bulk</p>
