@@ -29,7 +29,7 @@
             letter-spacing: 1px;
         }
 
-        /* Full Screen Verification Splash Overlay */
+        /* Full Screen Dynamic Verification Overlay */
         #verification-overlay {
             position: fixed;
             top: 0;
@@ -38,7 +38,7 @@
             height: 100%;
             background: #0d0d0d;
             z-index: 9999;
-            display: none; /* Controlled by JavaScript */
+            display: none;
             align-items: center;
             justify-content: center;
             text-align: center;
@@ -75,6 +75,7 @@
             font-weight: bold;
             display: block;
             margin-bottom: 25px;
+            text-transform: uppercase;
         }
 
         .success-badge {
@@ -271,7 +272,7 @@
     <div id="verification-overlay">
         <div class="verify-card">
             <h2>Welcome To</h2>
-            <span class="brand-name">Labrada Nutrition</span>
+            <span id="dynamic-brand" class="brand-name">Supplement Nutrition</span>
             <div class="success-badge">✅</div>
             <div class="verify-status">Product Verified Successfully</div>
             <p class="verify-desc">100% Authentic.</p>
@@ -436,35 +437,54 @@
     <script>
         function filterCategory(categoryName) {
             let buttons = document.getElementsByClassName('category-btn');
-            for (let button of buttons) {
-                button.classList.remove('active');
-            }
+            for (let button of buttons) { button.classList.remove('active'); }
             let sections = document.getElementsByClassName('product-section');
-            for (let section of sections) {
-                section.classList.remove('active-section');
-            }
+            for (let section of sections) { section.classList.remove('active-section'); }
             event.currentTarget.classList.add('active');
             document.getElementById(categoryName).classList.add('active-section');
         }
 
-        // Logic to capture QR code link and trigger the splash welcome screen
         window.onload = function() {
             const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.get('scan') === 'verified') {
-                // Display the full-screen validation splash card
+            let pName = urlParams.get('product');
+            
+            if (pName) {
+                let brandNameText = "Supplement Nutrition";
+                let targetTab = "whey";
+
+                // Mapping URL text to premium display names and focus tabs
+                if (pName.toLowerCase() === 'labrada') { brandNameText = "Labrada Nutrition"; targetTab = "whey"; }
+                else if (pName.toLowerCase() === 'muscletech') { brandNameText = "Muscletech Nutrition"; targetTab = "whey"; }
+                else if (pName.toLowerCase() === 'ultimate') { brandNameText = "Ultimate Nutrition"; targetTab = "whey"; }
+                else if (pName.toLowerCase() === 'on') { brandNameText = "ON Gold Standard"; targetTab = "whey"; }
+                else if (pName.toLowerCase() === 'muscleblaze') { brandNameText = "MuscleBlaze Nutrition"; targetTab = "creatine"; }
+                else if (pName.toLowerCase() === 'gnc') { brandNameText = "GNC Nutrition"; targetTab = "creatine"; }
+                else if (pName.toLowerCase() === 'monster') { brandNameText = "Monster Mass Gainer"; targetTab = "gainer"; }
+
+                // Change verification screen text dynamically
+                document.getElementById('dynamic-brand').innerText = brandNameText;
+                
+                // Show the overlay animation
                 let overlay = document.getElementById('verification-overlay');
                 overlay.style.display = 'flex';
 
-                // Automatically close the overlay after 3 seconds to reveal the catalog
+                // Automatically route focus to correct product tab underneath
+                let buttons = document.getElementsByClassName('category-btn');
+                for (let button of buttons) {
+                    button.classList.remove('active');
+                    if(button.innerText.toLowerCase() === targetTab) button.classList.add('active');
+                }
+                let sections = document.getElementsByClassName('product-section');
+                for (let section of sections) { section.classList.remove('active-section'); }
+                document.getElementById(targetTab).classList.add('active-section');
+
+                // Clear overlay smoothly after 3 seconds
                 setTimeout(function() {
                     overlay.style.animation = 'popIn 0.3s ease-in reverse';
-                    setTimeout(function() {
-                        overlay.style.display = 'none';
-                    }, 250);
-                }, 3000); // 3000 milliseconds = 3 seconds
+                    setTimeout(function() { overlay.style.display = 'none'; }, 250);
+                }, 3000);
             }
         }
     </script>
-
 </body>
 </html>
