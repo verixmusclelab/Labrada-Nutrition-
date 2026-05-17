@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -48,13 +49,15 @@
 
         .verify-card {
             background: #141414;
-            border: 3px solid #00ff00;
             padding: 40px 30px;
             border-radius: 20px;
             max-width: 500px;
-            box-shadow: 0 0 30px rgba(0, 255, 0, 0.3);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
             animation: popIn 0.5s ease-out;
         }
+
+        .card-success { border: 3px solid #00ff00; box-shadow: 0 0 30px rgba(0, 255, 0, 0.3); }
+        .card-fail { border: 3px solid #ff0000; box-shadow: 0 0 30px rgba(255, 0, 0, 0.3); }
 
         @keyframes popIn {
             0% { transform: scale(0.8); opacity: 0; }
@@ -78,30 +81,14 @@
             text-transform: uppercase;
         }
 
-        .success-badge {
-            font-size: 60px;
-            margin-bottom: 15px;
-        }
+        .success-badge { font-size: 60px; margin-bottom: 15px; }
+        .fail-badge { font-size: 60px; margin-bottom: 15px; }
 
-        .verify-status {
-            color: #00ff00;
-            font-size: 22px;
-            font-weight: bold;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-        }
+        .verify-status-ok { color: #00ff00; font-size: 22px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; }
+        .verify-status-fail { color: #ff0000; font-size: 22px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; }
 
-        .verify-desc {
-            color: #ffffff;
-            font-size: 18px;
-            font-weight: normal;
-            margin: 0 0 25px 0;
-        }
-
-        .redirect-loader {
-            font-size: 13px;
-            color: #888;
-        }
+        .verify-desc { color: #ffffff; font-size: 18px; margin: 0 0 25px 0; }
+        .redirect-loader { font-size: 13px; color: #888; }
 
         .spinner {
             width: 20px;
@@ -115,10 +102,7 @@
             animation: spin 1s linear infinite;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         /* Category Navigation Buttons */
         .category-nav {
@@ -149,6 +133,45 @@
             box-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
         }
 
+        /* Verification Form Styling */
+        .verify-input-section {
+            background: #141414;
+            border: 2px dashed #ffcc00;
+            max-width: 450px;
+            margin: 30px auto;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+        }
+
+        .verify-input-section h3 { color: #ffcc00; margin-top: 0; text-transform: uppercase; }
+        .verify-input-section input {
+            width: 85%;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #333;
+            background: #000;
+            color: #fff;
+            font-size: 16px;
+            text-align: center;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        .verify-action-btn {
+            background: #ffcc00;
+            color: #00;
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 90%;
+            text-transform: uppercase;
+        }
+
         /* Responsive Grid Layout */
         .catalog {
             display: grid;
@@ -159,13 +182,8 @@
             margin: 0 auto;
         }
 
-        .product-section {
-            display: none;
-        }
-
-        .product-section.active-section {
-            display: grid;
-        }
+        .product-section { display: none; }
+        .product-section.active-section { display: grid; }
 
         .supplement-card {
             background: #141414;
@@ -180,10 +198,7 @@
             transition: transform 0.2s;
         }
 
-        .supplement-card:hover {
-            transform: translateY(-5px);
-            border-color: #ffcc00;
-        }
+        .supplement-card:hover { transform: translateY(-5px); border-color: #ffcc00; }
 
         .image-container {
             height: 200px;
@@ -197,13 +212,7 @@
             padding: 10px;
         }
 
-        .supplement-card img {
-            max-height: 100%;
-            max-width: 48%;
-            object-fit: contain;
-            border-radius: 6px;
-        }
-
+        .supplement-card img { max-height: 100%; max-width: 48%; object-fit: contain; border-radius: 6px; }
         .supplement-card h2 {
             font-size: 19px;
             margin: 10px 0 5px 0;
@@ -227,24 +236,9 @@
             width: fit-content;
         }
 
-        .features {
-            text-align: left;
-            font-size: 13px;
-            color: #b3b3b3;
-            margin: 10px 0;
-            padding-left: 15px;
-        }
-
-        .features li {
-            margin-bottom: 4px;
-        }
-
-        .price {
-            font-size: 22px;
-            font-weight: bold;
-            color: #ffcc00;
-            margin: 15px 0;
-        }
+        .features { text-align: left; font-size: 13px; color: #b3b3b3; margin: 10px 0; padding-left: 15px; }
+        .features li { margin-bottom: 4px; }
+        .price { font-size: 22px; font-weight: bold; color: #ffcc00; margin: 15px 0; }
 
         .buy-btn {
             background: #ffcc00;
@@ -255,28 +249,23 @@
             font-weight: bold;
             border-radius: 6px;
             display: block;
-            transition: 0.3s;
             text-transform: uppercase;
             border: none;
-            cursor: pointer;
             text-align: center;
         }
-
-        .buy-btn:hover {
-            background: #ffffff;
-        }
+        .buy-btn:hover { background: #ffffff; }
     </style>
 </head>
 <body>
 
     <div id="verification-overlay">
-        <div class="verify-card">
+        <div id="overlay-card" class="verify-card">
             <h2>Welcome To</h2>
             <span id="dynamic-brand" class="brand-name">Supplement Nutrition</span>
-            <div class="success-badge">✅</div>
-            <div class="verify-status">Product Verified Successfully</div>
-            <p class="verify-desc">100% Authentic.</p>
-            <div class="redirect-loader">
+            <div id="dynamic-badge"></div>
+            <div id="dynamic-status"></div>
+            <p id="dynamic-desc" class="verify-desc"></p>
+            <div id="loader-box" class="redirect-loader">
                 <div class="spinner"></div> Loading supplement store...
             </div>
         </div>
@@ -290,6 +279,7 @@
         <button class="category-btn active" onclick="filterCategory('whey')">Whey Protein</button>
         <button class="category-btn" onclick="filterCategory('creatine')">Creatine</button>
         <button class="category-btn" onclick="filterCategory('gainer')">Gainer</button>
+        <button class="category-btn" onclick="filterCategory('manual-verify')" style="border-color: #ffcc00; color: #ffcc00;">Verify Code</button>
     </div>
 
     <section id="whey" class="catalog product-section active-section">
@@ -302,7 +292,7 @@
             <ul class="features">
                 <li>Nitrotech Performance Series</li>
                 <li>Lean Muscle Building</li>
-                <li>Highest Protein Percentage</li>
+                <li>Batch Code: TECH4800</li>
             </ul>
             <p class="price">₹4800/-</p>
             <a href="tel:9990954574" class="buy-btn">Call to Buy</a>
@@ -317,7 +307,7 @@
             <ul class="features">
                 <li>Prostar 100% Whey</li>
                 <li>Essential Amino Acids</li>
-                <li>Great Mixability</li>
+                <li>Batch Code: ULT4200</li>
             </ul>
             <p class="price">₹4200/-</p>
             <a href="tel:9990954574" class="buy-btn">Call to Buy</a>
@@ -332,7 +322,7 @@
             <ul class="features">
                 <li>Gold Standard 100% Whey</li>
                 <li>Isolate Primary Source</li>
-                <li>World's #1 Brand</li>
+                <li>Batch Code: ONGOLD52</li>
             </ul>
             <p class="price">₹5200/-</p>
             <a href="tel:9990954574" class="buy-btn">Call to Buy</a>
@@ -348,7 +338,7 @@
             <ul class="features">
                 <li>Premium Protein Source</li>
                 <li>Muscle Growth Support</li>
-                <li>Delicious Taste</li>
+                <li>Batch Code: LAB4200</li>
             </ul>
             <p class="price">₹4200/-</p>
             <a href="tel:9990954574" class="buy-btn">Call to Buy</a>
@@ -358,14 +348,14 @@
     <section id="creatine" class="catalog product-section">
         <div class="supplement-card">
             <div class="image-container">
-                <img src="https://i.ibb.co/hvDTM6H/prd-3979255-Muscle-Blaze-Creatine-Monohydrate-Cre-AMP-0-71-lb-Watermelon-Kool-Aid-o.jpg" alt="MuscleBlaze Creatine Monohydrate" style="max-width: 100%;">
+                <img src="https://i.ibb.co/hvDTM6H/prd-3979255-Muscle-Blaze-Creatine-Monohydrate-Cre-AMP-0-71-lb-Watermelon-Kool-Aid-o.jpg" alt="MuscleBlaze Creatine" style="max-width: 100%;">
             </div>
             <h2>MuscleBlaze Creatine Monohydrate</h2>
             <p class="tag">CreAMP Certified</p>
             <ul class="features">
                 <li>Helps Increase Strength</li>
                 <li>Faster ATP Recovery</li>
-                <li>Labdoor Certified</li>
+                <li>Batch Code: MB1199</li>
             </ul>
             <p class="price">320g • ₹1199/-</p>
             <a href="tel:9990954574" class="buy-btn">Call to Buy</a>
@@ -373,31 +363,16 @@
 
         <div class="supplement-card">
             <div class="image-container">
-                <img src="https://i.ibb.co/hvDTM6H/prd-3979255-Muscle-Blaze-Creatine-Monohydrate-Cre-AMP-0-71-lb-Watermelon-Kool-Aid-o.jpg" alt="GNC Creatine Monohydrate" style="max-width: 100%;">
+                <img src="https://i.ibb.co/hvDTM6H/prd-3979255-Muscle-Blaze-Creatine-Monohydrate-Cre-AMP-0-71-lb-Watermelon-Kool-Aid-o.jpg" alt="GNC Creatine" style="max-width: 100%;">
             </div>
             <h2>GNC Creatine Monohydrate</h2>
             <p class="tag">Pure Micronized</p>
             <ul class="features">
                 <li>100% Pure Micronized</li>
                 <li>Improves Athletic Power</li>
-                <li>Unflavored Easy Mix</li>
+                <li>Batch Code: GNC1299</li>
             </ul>
             <p class="price">₹1299/-</p>
-            <a href="tel:9990954574" class="buy-btn">Call to Buy</a>
-        </div>
-
-        <div class="supplement-card">
-            <div class="image-container">
-                <img src="https://i.ibb.co/hvDTM6H/prd-3979255-Muscle-Blaze-Creatine-Monohydrate-Cre-AMP-0-71-lb-Watermelon-Kool-Aid-o.jpg" alt="Muscletech Platinum Creatine" style="max-width: 100%;">
-            </div>
-            <h2>Muscletech Creatine Monohydrate</h2>
-            <p class="tag">Platinum Series</p>
-            <ul class="features">
-                <li>5g Pure Creatine Per Serve</li>
-                <li>Builds Lean Muscle</li>
-                <li>HPLC-Tested Quality</li>
-            </ul>
-            <p class="price">₹1499/-</p>
             <a href="tel:9990954574" class="buy-btn">Call to Buy</a>
         </div>
     </section>
@@ -412,7 +387,7 @@
             <ul class="features">
                 <li>High Quality Calories</li>
                 <li>Muscle Mass Growth</li>
-                <li>100% Authentic</li>
+                <li>Batch Code: LAB3000</li>
             </ul>
             <p class="price">₹3000/-</p>
             <a href="tel:9990954574" class="buy-btn">Call to Buy</a>
@@ -427,62 +402,116 @@
             <ul class="features">
                 <li>High Protein Gainer</li>
                 <li>Packed with BCAAs</li>
-                <li>Extreme Size Gain</li>
+                <li>Batch Code: MON3500</li>
             </ul>
             <p class="price">₹3500/-</p>
             <a href="tel:9990954574" class="buy-btn">Call to Buy</a>
         </div>
     </section>
 
+    <section id="manual-verify" class="product-section" style="padding: 10px;">
+        <div class="verify-input-section">
+            <h3>Secure Product Authenticator</h3>
+            <p style="font-size: 14px; color: #aaa; margin-bottom: 20px;">Enter the official brand code printed on your product box label.</p>
+            <input type="text" id="manualCodeInput" placeholder="ENTER CODE HERE">
+            <button class="verify-action-btn" onclick="triggerManualCheck()">Verify Product</button>
+        </div>
+    </section>
+
     <script>
+        // Database for secure validation codes mapping to brand text and correct focus tabs
+        const secureDatabase = {
+            "lab4200": { brand: "Labrada Nutrition", tab: "whey" },
+            "tech4800": { brand: "Muscletech Nutrition", tab: "whey" },
+            "ult4200": { brand: "Ultimate Nutrition", tab: "whey" },
+            "ongold52": { brand: "ON Gold Standard", tab: "whey" },
+            "mb1199": { brand: "MuscleBlaze Nutrition", tab: "creatine" },
+            "gnc1299": { brand: "GNC Nutrition", tab: "creatine" },
+            "mon3500": { brand: "Monster Mass Gainer", tab: "gainer" },
+            "lab3000": { brand: "Labrada Mass Gainer", tab: "gainer" }
+        };
+
         function filterCategory(categoryName) {
             let buttons = document.getElementsByClassName('category-btn');
             for (let button of buttons) { button.classList.remove('active'); }
             let sections = document.getElementsByClassName('product-section');
             for (let section of sections) { section.classList.remove('active-section'); }
-            event.currentTarget.classList.add('active');
+            
+            if(event) { event.currentTarget.classList.add('active'); }
             document.getElementById(categoryName).classList.add('active-section');
         }
 
-        window.onload = function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            let pName = urlParams.get('product');
-            
-            if (pName) {
-                let brandNameText = "Supplement Nutrition";
-                let targetTab = "whey";
+        function runVerificationProcess(inputCode) {
+            let code = inputCode.toLowerCase().trim();
+            let card = document.getElementById('overlay-card');
+            let brandDisplay = document.getElementById('dynamic-brand');
+            let badge = document.getElementById('dynamic-badge');
+            let status = document.getElementById('dynamic-status');
+            let desc = document.getElementById('dynamic-desc');
+            let loader = document.getElementById('loader-box');
+            let overlay = document.getElementById('verification-overlay');
 
-                // Mapping URL text to premium display names and focus tabs
-                if (pName.toLowerCase() === 'labrada') { brandNameText = "Labrada Nutrition"; targetTab = "whey"; }
-                else if (pName.toLowerCase() === 'muscletech') { brandNameText = "Muscletech Nutrition"; targetTab = "whey"; }
-                else if (pName.toLowerCase() === 'ultimate') { brandNameText = "Ultimate Nutrition"; targetTab = "whey"; }
-                else if (pName.toLowerCase() === 'on') { brandNameText = "ON Gold Standard"; targetTab = "whey"; }
-                else if (pName.toLowerCase() === 'muscleblaze') { brandNameText = "MuscleBlaze Nutrition"; targetTab = "creatine"; }
-                else if (pName.toLowerCase() === 'gnc') { brandNameText = "GNC Nutrition"; targetTab = "creatine"; }
-                else if (pName.toLowerCase() === 'monster') { brandNameText = "Monster Mass Gainer"; targetTab = "gainer"; }
+            // Reset card styling classes
+            card.className = "verify-card";
 
-                // Change verification screen text dynamically
-                document.getElementById('dynamic-brand').innerText = brandNameText;
-                
-                // Show the overlay animation
-                let overlay = document.getElementById('verification-overlay');
+            if (secureDatabase[code]) {
+                // SUCCESS MATCH
+                card.classList.add('card-success');
+                brandDisplay.innerText = secureDatabase[code].brand;
+                badge.className = "success-badge";
+                badge.innerText = "✅";
+                status.className = "verify-status-ok";
+                status.innerText = "Product Verified Successfully";
+                desc.innerText = "100% Authentic.";
+                loader.style.display = "block";
                 overlay.style.display = 'flex';
 
-                // Automatically route focus to correct product tab underneath
-                let buttons = document.getElementsByClassName('category-btn');
-                for (let button of buttons) {
-                    button.classList.remove('active');
-                    if(button.innerText.toLowerCase() === targetTab) button.classList.add('active');
-                }
-                let sections = document.getElementsByClassName('product-section');
-                for (let section of sections) { section.classList.remove('active-section'); }
-                document.getElementById(targetTab).classList.add('active-section');
+                // Route page underlay to the correct category view
+                setTimeout(function() {
+                    filterCategory(secureDatabase[code].tab);
+                    // Match tab active highlight class button
+                    let buttons = document.getElementsByClassName('category-btn');
+                    for (let b of buttons) {
+                        b.classList.remove('active');
+                        if(b.innerText.toLowerCase() === secureDatabase[code].tab) b.classList.add('active');
+                    }
+                }, 100);
 
-                // Clear overlay smoothly after 3 seconds
+                // Auto close screen popup smoothly
                 setTimeout(function() {
                     overlay.style.animation = 'popIn 0.3s ease-in reverse';
-                    setTimeout(function() { overlay.style.display = 'none'; }, 250);
-                }, 3000);
+                    setTimeout(function() { overlay.style.display = 'none'; }, 230);
+                }, 3500);
+
+            } else {
+                // FAIL MATCH / FAKE CODE ALERT
+                card.classList.add('card-fail');
+                brandDisplay.innerText = "UNKNOWN BRAND";
+                badge.className = "fail-badge";
+                badge.innerText = "❌";
+                status.className = "verify-status-fail";
+                status.innerText = "Verification Failed";
+                desc.innerText = "Invalid or Duplicate Code. Beware of fake products!";
+                loader.style.display = "none"; // Hide loader spinner on error
+                overlay.style.display = 'flex';
+
+                // Tap background overlay to exit alert box manually on error
+                overlay.onclick = function() { overlay.style.display = 'none'; };
+            }
+        }
+
+        function triggerManualCheck() {
+            let inputField = document.getElementById('manualCodeInput');
+            if(inputField.value.trim() === "") { alert("Please enter a code!"); return; }
+            runVerificationProcess(inputField.value);
+        }
+
+        // Auto run if scanning directly from web params format: ?code=LAB4200
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            let codeParam = urlParams.get('code');
+            if (codeParam) {
+                runVerificationProcess(codeParam);
             }
         }
     </script>
