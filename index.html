@@ -116,7 +116,7 @@
         .supplement-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 0px; /* Clean sharp corners like US Supplements */
+            border-radius: 0px;
             padding: 25px;
             text-align: center;
             display: flex;
@@ -264,7 +264,7 @@
             letter-spacing: 1px;
         }
 
-        /* Full Screen Error Security Overlay */
+        /* Full Screen Error Security Overlay - STRICT ADAPTIVE VISIBILITY WITH Z-INDEX RESET */
         #verification-overlay {
             position: fixed;
             top: 0;
@@ -272,8 +272,8 @@
             width: 100%;
             height: 100%;
             background: #000000;
-            z-index: 99999;
-            display: none;
+            z-index: -1; /* Piche rahega jab tak display flex na ho */
+            display: none; /* Invisible by default to unlock homepage clicks completely */
             align-items: center;
             justify-content: center;
             text-align: center;
@@ -339,7 +339,7 @@
     </div>
 
     <div class="top-bar">
-        ⚡ 100% Original & Genuine Formulas Directly Imported From USA ⚡
+        ⚡ 100% Original & Genuine Supplements Store ⚡
     </div>
 
     <header>
@@ -556,5 +556,4 @@
             for (let section of sections) { section.classList.remove('active-section'); }
             
             if (categoryName === 'whey') document.getElementById('btn-whey').classList.add('active');
-            else if (categoryName === 'creatine') document.getElementById('btn-creatine').classList.add('active');
-            else if (categoryName === 'gainer') documen
+            else if (categoryName === 'creatine') document.getElementById('btn-
