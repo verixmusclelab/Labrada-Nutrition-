@@ -29,7 +29,7 @@
             letter-spacing: 1px;
         }
 
-        /* Full Screen Dynamic Verification Overlay */
+        /* Full Screen OVERLAY - Scan karne par sabse pehle khulega */
         #verification-overlay {
             position: fixed;
             top: 0;
@@ -37,7 +37,7 @@
             width: 100%;
             height: 100%;
             background: #0d0d0d;
-            z-index: 9999;
+            z-index: 99999;
             display: none;
             align-items: center;
             justify-content: center;
@@ -50,23 +50,24 @@
             background: #141414;
             padding: 40px 30px;
             border-radius: 20px;
-            max-width: 500px;
-            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-            animation: popIn 0.5s ease-out;
+            width: 100%;
+            max-width: 450px;
+            box-sizing: border-box;
+            animation: popIn 0.4s ease-out;
         }
 
-        .card-success { border: 3px solid #00ff00; box-shadow: 0 0 30px rgba(0, 255, 0, 0.3); }
-        .card-fail { border: 3px solid #ff0000; box-shadow: 0 0 30px rgba(255, 0, 0, 0.3); }
+        .card-success { border: 3px solid #00ff00; box-shadow: 0 0 35px rgba(0, 255, 0, 0.4); }
+        .card-fail { border: 3px solid #ff0000; box-shadow: 0 0 35px rgba(255, 0, 0, 0.4); }
 
         @keyframes popIn {
-            0% { transform: scale(0.8); opacity: 0; }
+            0% { transform: scale(0.85); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
         }
 
         .verify-card h2 {
             color: #ffffff;
-            font-size: 24px;
-            margin-bottom: 10px;
+            font-size: 22px;
+            margin: 0 0 5px 0;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
@@ -76,22 +77,20 @@
             font-size: 28px;
             font-weight: bold;
             display: block;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             text-transform: uppercase;
         }
 
-        .success-badge { font-size: 60px; margin-bottom: 15px; }
-        .fail-badge { font-size: 60px; margin-bottom: 15px; }
-
-        .verify-status-ok { color: #00ff00; font-size: 22px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; }
-        .verify-status-fail { color: #ff0000; font-size: 22px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; }
+        .success-badge, .fail-badge { font-size: 65px; margin-bottom: 15px; }
+        .verify-status-ok { color: #00ff00; font-size: 24px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; }
+        .verify-status-fail { color: #ff0000; font-size: 24px; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; }
 
         .verify-desc { color: #ffffff; font-size: 18px; margin: 0 0 25px 0; }
-        .redirect-loader { font-size: 13px; color: #888; }
+        .redirect-loader { font-size: 14px; color: #888; }
 
         .spinner {
-            width: 20px;
-            height: 20px;
+            width: 18px;
+            height: 18px;
             border: 2px solid #333;
             border-top: 2px solid #ffcc00;
             border-radius: 50%;
@@ -103,7 +102,7 @@
 
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* Category Navigation Buttons */
+        /* Category Menu Tabs */
         .category-nav {
             display: flex;
             justify-content: center;
@@ -132,7 +131,7 @@
             box-shadow: 0 0 10px rgba(255, 204, 0, 0.5);
         }
 
-        /* Verification Form Styling */
+        /* Verification Form Section */
         .verify-input-section {
             background: #141414;
             border: 2px dashed #ffcc00;
@@ -147,7 +146,7 @@
         .verify-input-section h3 { color: #ffcc00; margin-top: 0; text-transform: uppercase; }
         .verify-input-section input {
             width: 85%;
-            padding: 12px;
+            padding: 13px;
             border-radius: 6px;
             border: 1px solid #333;
             background: #000;
@@ -194,10 +193,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            transition: transform 0.2s;
         }
-
-        .supplement-card:hover { transform: translateY(-5px); border-color: #ffcc00; }
 
         .image-container {
             height: 200px;
@@ -252,7 +248,6 @@
             border: none;
             text-align: center;
         }
-        .buy-btn:hover { background: #ffffff; }
     </style>
 </head>
 <body>
@@ -275,23 +270,23 @@
     </header>
 
     <div class="category-nav">
-        <button class="category-btn active" onclick="filterCategory('whey')">Whey Protein</button>
-        <button class="category-btn" onclick="filterCategory('creatine')">Creatine</button>
-        <button class="category-btn" onclick="filterCategory('gainer')">Gainer</button>
-        <button class="category-btn" onclick="filterCategory('manual-verify')" style="border-color: #ffcc00; color: #ffcc00;">Verify Code</button>
+        <button class="category-btn active" id="btn-whey" onclick="filterCategory('whey')">Whey Protein</button>
+        <button class="category-btn" id="btn-creatine" onclick="filterCategory('creatine')">Creatine</button>
+        <button class="category-btn" id="btn-gainer" onclick="filterCategory('gainer')">Gainer</button>
+        <button class="category-btn" id="btn-manual" onclick="filterCategory('manual-verify')" style="border-color: #ffcc00; color: #ffcc00;">Verify Code</button>
     </div>
 
     <section id="whey" class="catalog product-section active-section">
         <div class="supplement-card">
             <div class="image-container">
-                <img src="https://i.ibb.co/ynbr1YCw/download-1.webp" alt="Muscletech Nitrotech Whey Protein" style="max-width: 100%;">
+                <img src="https://i.ibb.co/ynbr1YCw/download-1.webp" alt="Muscletech" style="max-width: 100%;">
             </div>
             <h2>Muscletech Whey Protein</h2>
             <p class="tag">Premium Quality</p>
             <ul class="features">
                 <li>Nitrotech Performance Series</li>
                 <li>Lean Muscle Building</li>
-                <li>Original & Pure Formula</li>
+                <li>Original Formula</li>
             </ul>
             <p class="price">₹4800/-</p>
             <a href="tel:9990954574" class="buy-btn">Call to Buy</a>
@@ -299,7 +294,7 @@
 
         <div class="supplement-card">
             <div class="image-container">
-                <img src="https://i.ibb.co/MyLYJcjV/HVPM75-X4-2.jpg" alt="Ultimate Nutrition Pro Star Whey" style="max-width: 100%;">
+                <img src="https://i.ibb.co/MyLYJcjV/HVPM75-X4-2.jpg" alt="Ultimate Nutrition" style="max-width: 100%;">
             </div>
             <h2>Ultimate Pro Whey Protein</h2>
             <p class="tag">Best Recovery</p>
@@ -314,7 +309,7 @@
 
         <div class="supplement-card">
             <div class="image-container">
-                <img src="https://i.ibb.co/ynbr1YCw/download-1.webp" alt="ON Gold Standard Whey" style="max-width: 100%;">
+                <img src="https://i.ibb.co/ynbr1YCw/download-1.webp" alt="ON Gold" style="max-width: 100%;">
             </div>
             <h2>ON Gold Whey Protein</h2>
             <p class="tag">Top Seller</p>
@@ -329,8 +324,8 @@
 
         <div class="supplement-card">
             <div class="image-container">
-                <img src="https://i.ibb.co/8nP9m7jP/IMG-20260517-053830.jpg" alt="Labrada Whey Protein Front">
-                <img src="https://i.ibb.co/5gGsY2pf/IMG-20260517-053845.jpg" alt="Labrada Whey Protein Back">
+                <img src="https://i.ibb.co/8nP9m7jP/IMG-20260517-053830.jpg" alt="Labrada Front">
+                <img src="https://i.ibb.co/5gGsY2pf/IMG-20260517-053845.jpg" alt="Labrada Back">
             </div>
             <h2>Labrada Whey Protein</h2>
             <p class="tag">Made in USA</p>
@@ -347,7 +342,7 @@
     <section id="creatine" class="catalog product-section">
         <div class="supplement-card">
             <div class="image-container">
-                <img src="https://i.ibb.co/hvDTM6H/prd-3979255-Muscle-Blaze-Creatine-Monohydrate-Cre-AMP-0-71-lb-Watermelon-Kool-Aid-o.jpg" alt="MuscleBlaze Creatine" style="max-width: 100%;">
+                <img src="https://i.ibb.co/hvDTM6H/prd-3979255-Muscle-Blaze-Creatine-Monohydrate-Cre-AMP-0-71-lb-Watermelon-Kool-Aid-o.jpg" alt="MuscleBlaze" style="max-width: 100%;">
             </div>
             <h2>MuscleBlaze Creatine Monohydrate</h2>
             <p class="tag">CreAMP Certified</p>
@@ -362,7 +357,7 @@
 
         <div class="supplement-card">
             <div class="image-container">
-                <img src="https://i.ibb.co/hvDTM6H/prd-3979255-Muscle-Blaze-Creatine-Monohydrate-Cre-AMP-0-71-lb-Watermelon-Kool-Aid-o.jpg" alt="GNC Creatine" style="max-width: 100%;">
+                <img src="https://i.ibb.co/hvDTM6H/prd-3979255-Muscle-Blaze-Creatine-Monohydrate-Cre-AMP-0-71-lb-Watermelon-Kool-Aid-o.jpg" alt="GNC" style="max-width: 100%;">
             </div>
             <h2>GNC Creatine Monohydrate</h2>
             <p class="tag">Pure Micronized</p>
@@ -379,7 +374,7 @@
     <section id="gainer" class="catalog product-section">
         <div class="supplement-card">
             <div class="image-container">
-                <img src="https://i.ibb.co/sJjstZh7/Gainer-Choc-1-K-Front-1200x.jpg" alt="Labrada Mass Gainer" style="max-width: 100%;">
+                <img src="https://i.ibb.co/sJjstZh7/Gainer-Choc-1-K-Front-1200x.jpg" alt="Labrada Mass" style="max-width: 100%;">
             </div>
             <h2>Labrada Mass Gainer</h2>
             <p class="tag">Best Gainer</p>
@@ -394,7 +389,7 @@
 
         <div class="supplement-card">
             <div class="image-container">
-                <img src="https://i.ibb.co/sJjstZh7/Gainer-Choc-1-K-Front-1200x.jpg" alt="Monster Mass Gainer" style="max-width: 100%;">
+                <img src="https://i.ibb.co/sJjstZh7/Gainer-Choc-1-K-Front-1200x.jpg" alt="Monster Mass" style="max-width: 100%;">
             </div>
             <h2>Monster Mass Gainer</h2>
             <p class="tag">Heavy Bulk</p>
@@ -418,21 +413,34 @@
     </section>
 
     <script>
-        // Updated with your 100% confirmed real company codes
         const secureDatabase = {
+            // WHEY PROTEIN CODES
             "lbr7f29k": { brand: "Labrada Nutrition", tab: "whey" },
             "tru5mp91": { brand: "Muscletech Nutrition", tab: "whey" },
             "la24x8q2": { brand: "Ultimate Nutrition", tab: "whey" },
-            "mpn84k2l": { brand: "ON Gold Standard", tab: "whey" }
+            "mpn84k2l": { brand: "ON Gold Standard", tab: "whey" },
+            
+            // CREATINE CODES
+            "mbz9x14a": { brand: "MuscleBlaze Nutrition", tab: "creatine" },
+            "gnc3m78b": { brand: "GNC Nutrition", tab: "creatine" },
+            
+            // GAINER CODES
+            "lmg5p62c": { brand: "Labrada Mass Gainer", tab: "gainer" },
+            "mon8k43d": { brand: "Monster Mass Gainer", tab: "gainer" }
         };
 
         function filterCategory(categoryName) {
             let buttons = document.getElementsByClassName('category-btn');
             for (let button of buttons) { button.classList.remove('active'); }
+            
             let sections = document.getElementsByClassName('product-section');
             for (let section of sections) { section.classList.remove('active-section'); }
             
-            if(event && event.currentTarget) { event.currentTarget.classList.add('active'); }
+            if (categoryName === 'whey') document.getElementById('btn-whey').classList.add('active');
+            else if (categoryName === 'creatine') document.getElementById('btn-creatine').classList.add('active');
+            else if (categoryName === 'gainer') document.getElementById('btn-gainer').classList.add('active');
+            else if (categoryName === 'manual-verify') document.getElementById('btn-manual').classList.add('active');
+
             document.getElementById(categoryName).classList.add('active-section');
         }
 
@@ -449,7 +457,7 @@
             card.className = "verify-card";
 
             if (secureDatabase[code]) {
-                // SUCCESS
+                // SUCCESS MATCH
                 card.classList.add('card-success');
                 brandDisplay.innerText = secureDatabase[code].brand;
                 badge.className = "success-badge";
@@ -460,22 +468,15 @@
                 loader.style.display = "block";
                 overlay.style.display = 'flex';
 
-                setTimeout(function() {
-                    filterCategory(secureDatabase[code].tab);
-                    let buttons = document.getElementsByClassName('category-btn');
-                    for (let b of buttons) {
-                        b.classList.remove('active');
-                        if(b.innerText.toLowerCase() === secureDatabase[code].tab) b.classList.add('active');
-                    }
-                }, 100);
+                filterCategory(secureDatabase[code].tab);
 
                 setTimeout(function() {
                     overlay.style.animation = 'popIn 0.3s ease-in reverse';
                     setTimeout(function() { overlay.style.display = 'none'; }, 230);
-                }, 3500);
+                }, 3000);
 
             } else {
-                // FAKE CODE ENCOUNTERED
+                // INVALID CODE ALERT
                 card.classList.add('card-fail');
                 brandDisplay.innerText = "UNKNOWN BRAND";
                 badge.className = "fail-badge";
@@ -492,7 +493,7 @@
 
         function triggerManualCheck() {
             let inputField = document.getElementById('manualCodeInput');
-            if(inputField.value.trim() === "") { alert("Please enter a valid code!"); return; }
+            if(inputField.value.trim() === "") { alert("Please type a valid code first!"); return; }
             runVerificationProcess(inputField.value);
         }
 
@@ -506,3 +507,5 @@
     </script>
 </body>
 </html>
+
+
