@@ -558,7 +558,25 @@ Buy On WhatsApp
     <p style="text-align:center; color:#999;">
         Copyright © 2026 5 Brother's Fitness
     </p>
+<script>
+document.querySelectorAll('.footer-link').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
 
+        let id = this.getAttribute('href').replace('#', '');
+        let section = document.getElementById(id);
+
+        if (section.style.display === "block") {
+            section.style.display = "none";
+        } else {
+            document.querySelectorAll('#about, #brands, #contact, #privacy, #media, #career')
+                .forEach(el => el.style.display = 'none');
+
+            section.style.display = "block";
+        }
+    });
+});
+</script>
 </footer>
 <div id="about" style="display:none; background:#111; padding:20px; color:white;">
 <h2>About Us</h2>
