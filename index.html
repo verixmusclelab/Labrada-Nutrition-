@@ -508,38 +508,13 @@
             if(inputField.value.trim() === "") { alert("Please type a valid code first!"); return; }
             runVerificationProcess(inputField.value, false);
         }
-
-window.onload = function() {
+window.onload = function () {
     const urlParams = new URLSearchParams(window.location.search);
     let codeParam = urlParams.get('code');
 
     if (codeParam) {
-        document.body.style.overflow = "hidden";
-
-        setTimeout(function () {
-            document.body.innerHTML = `
-            <div style="
-                background:#0d0d0d;
-                color:#00ff00;
-                height:100vh;
-                display:flex;
-                justify-content:center;
-                align-items:center;
-                font-size:34px;
-                font-weight:bold;
-                text-align:center;
-                padding:20px;
-            ">
-                ✅ VERIFIED
-            </div>`;
-        }, 10);
-    }
-}
-
         runVerificationProcess(codeParam, true);
 
-        document.body.style.overflow = "hidden";
-
         setTimeout(function () {
             document.body.innerHTML = `
             <div style="
@@ -556,7 +531,7 @@ window.onload = function() {
             ">
                 ✅ VERIFIED
             </div>`;
-        }, 50);
+        }, 100);
     }
 }
     </script>
