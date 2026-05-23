@@ -508,30 +508,17 @@
             if(inputField.value.trim() === "") { alert("Please type a valid code first!"); return; }
             runVerificationProcess(inputField.value, false);
         }
-window.onload = function () {
+window.onload = function() {
     const urlParams = new URLSearchParams(window.location.search);
     let codeParam = urlParams.get('code');
 
     if (codeParam) {
         runVerificationProcess(codeParam, true);
 
-        setTimeout(function () {
-            document.body.innerHTML = `
-            <div style="
-                background:#0d0d0d;
-                color:#00ff00;
-                height:100vh;
-                display:flex;
-                justify-content:center;
-                align-items:center;
-                font-size:34px;
-                font-weight:bold;
-                text-align:center;
-                padding:20px;
-            ">
-                ✅ VERIFIED
-            </div>`;
-        }, 100);
+        setTimeout(function() {
+            let overlay = document.getElementById('verification-overlay');
+            overlay.style.display = 'none';
+        }, 2000);
     }
 }
     </script>
