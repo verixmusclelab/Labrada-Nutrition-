@@ -6,34 +6,53 @@
     <title>Labrada Nutrition Supplement Store</title>
     <style>
         /* Premium Dark Gym Theme */
-        body {
-        position: relative;
+
+body {
+    position: relative;
     margin: 0;
     font-family: 'Arial', sans-serif;
     background-color: #0d0d0d;
     color: #ffffff;
     padding-bottom: 40px;
+    overflow-x: hidden;
 }
 
-        body::before {
+/* Bottom Right Logo */
+body::before {
     content: "";
     position: fixed;
 
-    bottom: 40px;
-    right: 30px;
+    bottom: 25px;
+    right: 25px;
 
-    width: 320px;
-    height: 320px;
+    width: 230px;
+    height: 230px;
 
     background-image: url('https://i.ibb.co/KcmwdFHm/file-00000000848c7208aecb1fd1667683cb.png');
-    background
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 
-        header {
-            background: #000000;
-            padding: 20px;
-            text-align: center;
-            border-bottom: 3px solid #ffcc00;
-        }
+    opacity: 1;
+
+    pointer-events: none;
+    z-index: 0;
+}
+
+header {
+    background: #000000;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 3px solid #ffcc00;
+}
+
+header h1 {
+    color: #ffcc00;
+    margin: 0;
+    font-size: 26px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
 
         header h1 {
             color: #ffcc00;
