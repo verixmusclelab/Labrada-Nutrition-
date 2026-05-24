@@ -733,84 +733,101 @@ document.getElementById(
 }
 <script>
 
-const secureDatabase = {
-    "lbr7f29k": { brand: "Labrada Nutrition" },
-    "tru5mp91": { brand: "Muscletech Nutrition" },
-    "la24x8q2": { brand: "Ultimate Nutrition" },
-    "mpn84k2l": { brand: "ON Gold Standard" },
-    "mbz9x14a": { brand: "MuscleBlaze Nutrition" },
-    "gnc3m78b": { brand: "GNC Nutrition" },
-    "wel4c8t2": { brand: "Wellcore Nutrition" },
-    "lmg5p62c": { brand: "Labrada Mass Gainer" },
-    "mon8k43d": { brand: "Monster Mass Gainer" }
-};
+</section>
 
-function verifyCode() {
+    <section id="manual-verify" class="product-section" style="padding: 10px;">
+        <div class="verify-input-section">
+            <h3>Secure Product Authenticator</h3>
+            <p style="font-size: 14px; color: #aaa; margin-bottom: 20px;">Enter the 8-character official brand code printed on your label.</p>
+            <input type="text" id="manualCodeInput" placeholder="e.g. LBR7F29K">
+            <button class="verify-action-btn" onclick="triggerManualCheck()">Verify Product</button>
+        </div>
+    </section>
 
-    let code = document
-        .getElementById("manualCodeInput")
-        .value
-        .trim()
-        .toLowerCase();
+    <script>
+        const secureDatabase = {
+            "lbr7f29k": { brand: "Labrada Nutrition", tab: "whey" },
+            "tru5mp91": { brand: "Muscletech Nutrition", tab: "whey" },
+            "la24x8q2": { brand: "Ultimate Nutrition", tab: "whey" },
+            "mpn84k2l": { brand: "ON Gold Standard", tab: "whey" },
+            "mbz9x14a": { brand: "MuscleBlaze Nutrition", tab: "creatine" },
+            "gnc3m78b": { brand: "GNC Nutrition", tab: "creatine" },
+            "wel4c8t2": { brand: "Wellcore Nutrition", tab: "creatine" },
+            "lmg5p62c": { brand: "Labrada Mass Gainer", tab: "gainer" },
+            "mon8k43d": { brand: "Monster Mass Gainer", tab: "gainer" }
+        };
 
-    if (code === "") {
-        alert("Please Enter Product Code");
-        return;
-    }
+        function filterCategory(categoryName) {
+            let buttons = document.getElementsByClassName('category-btn');
+            for (let button of buttons) { button.classList.remove('active'); }
+            
+            let sections = document.getElementsByClassName('product-section');
+            for (let section of sections) { section.classList.remove('active-section'); }
+            
+            if (categoryName === 'whey') document.getElementById('btn-whey').classList.add('active');
+            else if (categoryName === 'creatine') document.getElementById('btn-creatine').classList.add('active');
+            else if (categoryName === 'gainer') document.getElementById('btn-gainer').classList.add('active');
+            else if (categoryName === 'manual-verify') document.getElementById('btn-manual').classList.add('active');
 
-    let overlay =
-        document.getElementById("verification-overlay");
+            document.getElementById(categoryName).classList.add('active-section');
+        }
 
-    let verifyText =
-        document.getElementById("verifyText");
+        function runVerificationProcess(inputCode, isAutoScan) {
+            let code = inputCode.toLowerCase().trim();
+            let card = document.getElementById('overlay-card');
+            let brandDisplay = document.getElementById('dynamic-brand');
+            let badge = document.getElementById('dynamic-badge');
+            let status = document.getElementById('dynamic-status');
+            let desc = document.getElementById('dynamic-desc');
+            let loader = document.getElementById('loader-box');
+            let overlay = document.getElementById('verification-overlay');
 
-    let popupText =
-        overlay.querySelector("p");
+            card.className = "verify-card";
 
-    if (secureDatabase[code]) {
+            if (secureDatabase[code]) {
+                card.classList.add('card-success');
+                brandDisplay.innerText = secureDatabase[code].brand;
+                badge.className = "success-badge";
+                badge.innerText = "✅";
+                status.className = "verify-status-ok";
+                status.innerText = "Product Verified Successfully";
+                desc.innerText = "100% Authentic.";
+                overlay.style.display = 'flex';
 
-        verifyText.innerText =
-            "PRODUCT VERIFIED SUCCESSFULLY ✅";
+                filterCategory(secureDatabase[code].tab);
 
-        popupText.innerText =
-            "100% Authentic Product";
+                if (isAutoScan) {
+    loader.style.display = "none";
+} else {
+    loader.style.display = "none";
+                }
 
-    } else {
+            } else {
+                card.classList.add('card-fail');
+                brandDisplay.innerText = "UNKNOWN BRAND";
+                badge.className = "fail-badge";
+                badge.innerText = "❌";
+                status.className = "verify-status-fail";
+                status.innerText = "Verification Failed";
+                desc.innerText = "Invalid or Duplicate Code. Beware of fake products!";
+                loader.style.display = "none";
+                overlay.style.display = 'flex';
 
-        verifyText.innerText =
-            "VERIFICATION FAILED ❌";
+                overlay.onclick = function() { overlay.style.display = 'none'; };
+            }
+        }
 
-        popupText.innerText =
-            "Invalid or Fake Product Code";
+        function triggerManualCheck() {
+            let inputField = document.getElementById('manualCodeInput');
+            if(inputField.value.trim() === "") { alert("Please type a valid code first!"); return; }
+            runVerificationProcess(inputField.value, false);
+        }
+window.onload = function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    let codeParam = urlParams.get('code');
 
-    }
 
-    overlay.style.display = "flex";
-}
-
-function closePopup() {
-    document.getElementById(
-        "verification-overlay"
-    ).style.display = "none";
-}
-
-/* QR URL AUTO VERIFY */
-const params =
-    new URLSearchParams(window.location.search);
-
-const code =
-    params.get("code");
-
-if (code) {
-
-    document.getElementById(
-        "manualCodeInput"
-    ).value = code;
-
-    verifyCode();
-}
-
-</script>
+        
 </script>
 
 <footer>
