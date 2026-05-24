@@ -671,7 +671,13 @@ document.querySelector(".verify-card p").innerText =
 
 document.querySelector(".verify-card").style.border =
 "3px solid #00ff00";
+setTimeout(function(){
 
+document.getElementById(
+"manualCodeInput"
+).value = "";
+
+},300);
 }
 
 
