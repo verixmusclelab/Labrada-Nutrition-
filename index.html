@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +15,6 @@ margin:0;
 padding:0;
 box-sizing:border-box;
 font-family:Arial,sans-serif;
-scroll-behavior:smooth;
 }
 
 body{
@@ -38,7 +38,6 @@ display:flex;
 justify-content:space-between;
 align-items:center;
 flex-wrap:wrap;
-gap:10px;
 }
 
 .logo h1{
@@ -74,35 +73,6 @@ background:#25D366;
 color:white;
 }
 
-/* MENU */
-
-.menu{
-display:flex;
-gap:10px;
-overflow:auto;
-padding:15px;
-background:#111;
-position:sticky;
-top:80px;
-z-index:999;
-}
-
-.menu button{
-border:none;
-background:#1b1b1b;
-color:white;
-padding:12px 18px;
-border-radius:40px;
-font-weight:bold;
-cursor:pointer;
-white-space:nowrap;
-}
-
-.menu button:hover{
-background:#ffcc00;
-color:black;
-}
-
 /* HERO */
 
 .hero{
@@ -111,28 +81,14 @@ text-align:center;
 }
 
 .hero h2{
-font-size:42px;
+font-size:40px;
 color:#ffcc00;
 margin-bottom:10px;
 }
 
 .hero p{
 color:#bbb;
-margin-bottom:20px;
 font-size:18px;
-}
-
-.search-box{
-max-width:500px;
-margin:auto;
-}
-
-.search-box input{
-width:100%;
-padding:16px;
-border:none;
-border-radius:15px;
-font-size:17px;
 }
 
 /* PRODUCTS */
@@ -162,13 +118,9 @@ border:1px solid #333;
 
 .card img{
 width:100%;
-height:250px;
+height:240px;
 object-fit:contain;
 margin-bottom:15px;
-}
-
-.card h3{
-margin-bottom:10px;
 }
 
 .price{
@@ -199,15 +151,11 @@ background:#25D366;
 color:white;
 }
 
-/* VERIFY */
+/* VERIFY SECTION */
 
 .verify-section{
-padding:60px 20px;
+padding:50px 20px;
 text-align:center;
-background:#111;
-margin:40px 20px;
-border-radius:25px;
-border:2px solid #ffcc00;
 }
 
 .verify-section input{
@@ -217,7 +165,6 @@ max-width:400px;
 border:none;
 border-radius:15px;
 font-size:18px;
-margin-top:20px;
 }
 
 .verify-section button{
@@ -231,7 +178,7 @@ cursor:pointer;
 margin-top:20px;
 }
 
-/* POPUP */
+/* PRODUCT POPUP */
 
 .popup{
 display:none;
@@ -240,7 +187,7 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,.92);
+background:rgba(0,0,0,.93);
 justify-content:center;
 align-items:center;
 z-index:999999;
@@ -266,19 +213,19 @@ text-align:center;
 
 .popup-box p{
 line-height:1.9;
+font-size:16px;
 color:#ddd;
-font-size:15px;
 }
 
 .close-btn{
-padding:14px 25px;
-background:#ffcc00;
+padding:14px;
+width:100%;
 border:none;
 border-radius:12px;
+background:#ffcc00;
 font-weight:bold;
-cursor:pointer;
-width:100%;
 margin-top:20px;
+cursor:pointer;
 }
 
 /* VERIFY POPUP */
@@ -290,7 +237,7 @@ top:0;
 left:0;
 width:100%;
 height:100%;
-background:rgba(0,0,0,.96);
+background:rgba(0,0,0,.95);
 justify-content:center;
 align-items:center;
 z-index:999999;
@@ -298,14 +245,38 @@ z-index:999999;
 
 #verify-box{
 background:#111;
-padding:45px 30px;
+padding:40px 25px;
 border-radius:25px;
 text-align:center;
 width:90%;
-max-width:350px;
+max-width:360px;
 border:3px solid #00ff00;
 box-shadow:0 0 25px #00ff00;
 }
+
+#brand-name{
+font-size:32px;
+color:#ffcc00;
+margin-bottom:15px;
+}
+
+#verify-icon{
+font-size:70px;
+margin-bottom:15px;
+}
+
+#verify-status{
+font-size:28px;
+margin-bottom:10px;
+color:#00ff00;
+}
+
+#verify-msg{
+font-size:18px;
+color:white;
+}
+
+/* FOOTER */
 
 footer{
 margin-top:50px;
@@ -347,40 +318,6 @@ WhatsApp
 
 </header>
 
-<!-- MENU -->
-
-<div class="menu">
-
-<button onclick="showCategory('all')">
-All
-</button>
-
-<button onclick="showCategory('whey')">
-Whey
-</button>
-
-<button onclick="showCategory('creatine')">
-Creatine
-</button>
-
-<button onclick="showCategory('gainer')">
-Gainer
-</button>
-
-<button onclick="showCategory('preworkout')">
-Pre Workout
-</button>
-
-<button onclick="showCategory('multivitamin')">
-Multivitamin
-</button>
-
-<button onclick="showCategory('fishoil')">
-Fish Oil
-</button>
-
-</div>
-
 <!-- HERO -->
 
 <section class="hero">
@@ -393,15 +330,6 @@ Fish Oil
 Premium Supplements For Real Results
 </p>
 
-<div class="search-box">
-
-<input
-type="text"
-id="searchInput"
-placeholder="Search supplements...">
-
-</div>
-
 </section>
 
 <!-- PRODUCTS -->
@@ -412,88 +340,9 @@ placeholder="Search supplements...">
 
 <div class="product-grid">
 
-<!-- LABRADA -->
-
-<div class="card"
-data-category="whey">
-
-<img src="https://i.ibb.co/ynbr1YCw/download-1.webp">
-
-<h3>Labrada Whey Protein</h3>
-
-<p>24g Protein • 5.2g BCAA</p>
-
-<div class="price">
-₹5900
-</div>
-
-<button
-onclick="openPopup('labrada-popup')"
-class="buy-btn buy-call">
-
-View Details
-
-</button>
-
-<a href="https://wa.me/919990954574"
-class="buy-btn buy-wa">
-
-WhatsApp Order
-
-</a>
-
-<a href="tel:9990954574"
-class="buy-btn buy-call">
-
-Call Now
-
-</a>
-
-</div>
-
-<!-- MUSCLETECH -->
-
-<div class="card"
-data-category="whey">
-
-<img src="https://i.ibb.co/MyLYJcjV/HVPM75-X4-2.jpg">
-
-<h3>Muscletech Nitro Tech</h3>
-
-<p>30g Protein • 6.8g BCAA</p>
-
-<div class="price">
-₹4200
-</div>
-
-<button
-onclick="openPopup('muscletech-popup')"
-class="buy-btn buy-call">
-
-View Details
-
-</button>
-
-<a href="https://wa.me/919990954574"
-class="buy-btn buy-wa">
-
-WhatsApp Order
-
-</a>
-
-<a href="tel:9990954574"
-class="buy-btn buy-call">
-
-Call Now
-
-</a>
-
-</div>
-
 <!-- PRE WORKOUT -->
 
-<div class="card"
-data-category="preworkout">
+<div class="card">
 
 <img src="https://i.ibb.co/9H4Qm7L/preworkout.jpg">
 
@@ -520,19 +369,11 @@ WhatsApp Order
 
 </a>
 
-<a href="tel:9990954574"
-class="buy-btn buy-call">
-
-Call Now
-
-</a>
-
 </div>
 
 <!-- MULTIVITAMIN -->
 
-<div class="card"
-data-category="multivitamin">
+<div class="card">
 
 <img src="https://i.ibb.co/fv0J0Lx/multivitamin.jpg">
 
@@ -559,19 +400,11 @@ WhatsApp Order
 
 </a>
 
-<a href="tel:9990954574"
-class="buy-btn buy-call">
-
-Call Now
-
-</a>
-
 </div>
 
 <!-- FISH OIL -->
 
-<div class="card"
-data-category="fishoil">
+<div class="card">
 
 <img src="https://i.ibb.co/F7W0n4g/fishoil.jpg">
 
@@ -595,13 +428,6 @@ View Details
 class="buy-btn buy-wa">
 
 WhatsApp Order
-
-</a>
-
-<a href="tel:9990954574"
-class="buy-btn buy-call">
-
-Call Now
 
 </a>
 
@@ -629,42 +455,7 @@ Verify Product
 
 </section>
 
-<!-- LABRADA POPUP -->
-
-<div id="labrada-popup"
-class="popup">
-
-<div class="popup-box">
-
-<h2>
-Labrada Whey Protein
-</h2>
-
-<p>
-
-✅ 24g Protein<br><br>
-
-✅ Whey Protein Concentrate<br><br>
-
-✅ Fast Recovery<br><br>
-
-✅ Muscle Growth Support
-
-</p>
-
-<button
-onclick="closePopup('labrada-popup')"
-class="close-btn">
-
-Close
-
-</button>
-
-</div>
-
-</div>
-
-<!-- PRE WORKOUT POPUP -->
+<!-- PRE POPUP -->
 
 <div id="pre-popup"
 class="popup">
@@ -677,7 +468,7 @@ Muscletech Pre Workout
 
 <p>
 
-✅ Extreme Energy<br><br>
+✅ Extreme Energy Boost<br><br>
 
 ✅ Better Focus<br><br>
 
@@ -699,7 +490,7 @@ Close
 
 </div>
 
-<!-- MULTIVITAMIN POPUP -->
+<!-- MULTI POPUP -->
 
 <div id="multi-popup"
 class="popup">
@@ -714,9 +505,9 @@ GNC Multivitamin
 
 ✅ Daily Health Support<br><br>
 
-✅ Better Immunity<br><br>
-
 ✅ Vitamins & Minerals<br><br>
+
+✅ Better Immunity<br><br>
 
 ✅ Energy Support
 
@@ -734,7 +525,7 @@ Close
 
 </div>
 
-<!-- FISH OIL POPUP -->
+<!-- FISH POPUP -->
 
 <div id="fish-popup"
 class="popup">
@@ -749,9 +540,9 @@ MuscleBlaze Fish Oil
 
 ✅ Omega 3 Support<br><br>
 
-✅ Heart Health<br><br>
-
 ✅ Joint Support<br><br>
+
+✅ Heart Health<br><br>
 
 ✅ Better Recovery
 
@@ -775,41 +566,20 @@ Close
 
 <div id="verify-box">
 
-<h1 id="brand-name"
-style="
-color:#ffcc00;
-margin-bottom:20px;
-font-size:32px;
-">
-
+<h1 id="brand-name">
 PRODUCT
-
 </h1>
 
-<div id="verify-icon"
-style="
-font-size:70px;
-margin-bottom:15px;
-">
-
+<div id="verify-icon">
 ✅
-
 </div>
 
-<h2 id="verify-status"
-style="
-color:#00ff00;
-margin-bottom:10px;
-">
-
+<h2 id="verify-status">
 PRODUCT VERIFIED
-
 </h2>
 
 <p id="verify-msg">
-
 100% Authentic
-
 </p>
 
 <button
@@ -842,77 +612,6 @@ Multi Brand Supplement Store
 
 <script>
 
-/* CATEGORY */
-
-function showCategory(category){
-
-let cards =
-document.querySelectorAll(".card");
-
-cards.forEach(function(card){
-
-if(category==="all"){
-
-card.style.display="block";
-
-}
-
-else if(
-card.dataset.category===category
-){
-
-card.style.display="block";
-
-}
-
-else{
-
-card.style.display="none";
-
-}
-
-});
-
-}
-
-/* SEARCH */
-
-const searchInput =
-document.getElementById(
-"searchInput"
-);
-
-searchInput.addEventListener(
-"keyup",
-function(){
-
-let value =
-this.value.toLowerCase();
-
-let cards =
-document.querySelectorAll(".card");
-
-cards.forEach(function(card){
-
-let text =
-card.innerText.toLowerCase();
-
-if(text.includes(value)){
-
-card.style.display="block";
-
-}
-
-else{
-
-card.style.display="none";
-
-}
-
-});
-
-});
-
 /* PRODUCT POPUP */
 
 function openPopup(id){
@@ -929,7 +628,7 @@ document.getElementById(id)
 
 }
 
-/* VERIFY */
+/* VERIFY FUNCTION */
 
 function verifyCode(){
 
@@ -951,23 +650,26 @@ return;
 
 }
 
-const products={
+const products = {
 
-"LBR7F29K":"LABRADA NUTRITION",
+"PRE9W8X1":
+"MUSCLETECH PRE WORKOUT",
 
-"MUS4T8X2":"MUSCLETECH",
+"MUL4T7V2":
+"GNC MULTIVITAMIN",
 
-"PRE9W8X1":"MUSCLETECH PRE WORKOUT",
-
-"MUL4T7V2":"GNC MULTIVITAMIN",
-
-"FSH6O3L9":"MUSCLEBLAZE FISH OIL"
+"FSH6O3L9":
+"MUSCLEBLAZE FISH OIL"
 
 };
+
+/* OPEN VERIFY POPUP */
 
 document.getElementById(
 "verification-overlay"
 ).style.display="flex";
+
+/* SUCCESS */
 
 if(products[code]){
 
@@ -1001,7 +703,14 @@ document.getElementById(
 ).style.border =
 "3px solid #00ff00";
 
+document.getElementById(
+"verify-box"
+).style.boxShadow =
+"0 0 25px #00ff00";
+
 }
+
+/* FAILED */
 
 else{
 
@@ -1035,7 +744,14 @@ document.getElementById(
 ).style.border =
 "3px solid red";
 
+document.getElementById(
+"verify-box"
+).style.boxShadow =
+"0 0 25px red";
+
 }
+
+/* CLEAR INPUT */
 
 input.value="";
 
@@ -1051,9 +767,9 @@ document.getElementById(
 
 }
 
-/* AUTO VERIFY */
+/* AUTO VERIFY FROM QR */
 
-window.onload=function(){
+window.onload = function(){
 
 const params =
 new URLSearchParams(
