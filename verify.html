@@ -281,188 +281,169 @@ VERIFY PRODUCT
 
 <script>
 
-const products={
+/* PRODUCT DATABASE */
 
-"LBR7F29K":{
+const productDatabase={
 
+/* LABRADA WHEY */
+
+"LBR-A91X7K":{
 brand:"LABRADA NUTRITION",
-product:"WHEY PROTEIN"
-
+product:"WHEY PROTEIN",
+batch:"LW2401"
 },
 
-"LMG5P62C":{
-
+"LBR-B52P9Q":{
 brand:"LABRADA NUTRITION",
-product:"MASS GAINER"
-
+product:"WHEY PROTEIN",
+batch:"LW2402"
 },
 
-"TRU5MP91":{
+"LBR-C88T2M":{
+brand:"LABRADA NUTRITION",
+product:"WHEY PROTEIN",
+batch:"LW2403"
+},
 
+"LBR-D14N6R":{
+brand:"LABRADA NUTRITION",
+product:"WHEY PROTEIN",
+batch:"LW2404"
+},
+
+"LBR-E73K9L":{
+brand:"LABRADA NUTRITION",
+product:"WHEY PROTEIN",
+batch:"LW2405"
+},
+
+"LBR-F28Q4X":{
+brand:"LABRADA NUTRITION",
+product:"WHEY PROTEIN",
+batch:"LW2406"
+},
+
+"LBR-G90T2P":{
+brand:"LABRADA NUTRITION",
+product:"WHEY PROTEIN",
+batch:"LW2407"
+},
+
+"LBR-H61M8K":{
+brand:"LABRADA NUTRITION",
+product:"WHEY PROTEIN",
+batch:"LW2408"
+},
+
+"LBR-J37R5Q":{
+brand:"LABRADA NUTRITION",
+product:"WHEY PROTEIN",
+batch:"LW2409"
+},
+
+"LBR-K84X1N":{
+brand:"LABRADA NUTRITION",
+product:"WHEY PROTEIN",
+batch:"LW2410"
+},
+
+/* LABRADA GAINER */
+
+"LMG-A71P9X":{
+brand:"LABRADA NUTRITION",
+product:"MASS GAINER",
+batch:"LG2401"
+},
+
+"LMG-B25Q8L":{
+brand:"LABRADA NUTRITION",
+product:"MASS GAINER",
+batch:"LG2402"
+},
+
+"LMG-C93T1M":{
+brand:"LABRADA NUTRITION",
+product:"MASS GAINER",
+batch:"LG2403"
+},
+
+"LMG-D42N7R":{
+brand:"LABRADA NUTRITION",
+product:"MASS GAINER",
+batch:"LG2404"
+},
+
+"LMG-E81K5Q":{
+brand:"LABRADA NUTRITION",
+product:"MASS GAINER",
+batch:"LG2405"
+},
+
+"LMG-F36P2T":{
+brand:"LABRADA NUTRITION",
+product:"MASS GAINER",
+batch:"LG2406"
+},
+
+"LMG-G90X4L":{
+brand:"LABRADA NUTRITION",
+product:"MASS GAINER",
+batch:"LG2407"
+},
+
+"LMG-H11R8M":{
+brand:"LABRADA NUTRITION",
+product:"MASS GAINER",
+batch:"LG2408"
+},
+
+"LMG-J63Q2N":{
+brand:"LABRADA NUTRITION",
+product:"MASS GAINER",
+batch:"LG2409"
+},
+
+"LMG-K29T5P":{
+brand:"LABRADA NUTRITION",
+product:"MASS GAINER",
+batch:"LG2410"
+},
+
+/* MUSCLETECH NITRO TECH */
+
+"MST-A44P8Q":{
 brand:"MUSCLETECH",
-product:"NITRO TECH"
+product:"NITRO TECH",
+batch:"MT2401"
+},
 
-},"PRE9W7K2":{
-
+"MST-B92K1X":{
 brand:"MUSCLETECH",
-product:"PRE WORKOUT"
-
+product:"NITRO TECH",
+batch:"MT2402"
 },
 
-"ON84P2X":{
-
-brand:"OPTIMUM NUTRITION",
-product:"GOLD STANDARD WHEY"
-
+"MST-C57R6L":{
+brand:"MUSCLETECH",
+product:"NITRO TECH",
+batch:"MT2403"
 },
 
-"GNC3M78B":{
-
-brand:"GNC",
-product:"CREATINE"
-
+"MST-D18M4T":{
+brand:"MUSCLETECH",
+product:"NITRO TECH",
+batch:"MT2404"
 },
 
-"MUL4V8T1":{
-
-brand:"GNC",
-product:"MULTIVITAMIN"
-
-},
-
-"FIS8O2L9":{
-
-brand:"MUSCLEBLAZE",
-product:"FISH OIL"
-
+"MST-E63Q9P":{
+brand:"MUSCLETECH",
+product:"NITRO TECH",
+batch:"MT2405"
 }
 
 };
 
-let currentCode="";
 
-window.onload=function(){
-
-const params=
-new URLSearchParams(
-window.location.search
-);
-
-const code=params.get("code");
-
-if(code &&
-products[code.toUpperCase()]){
-
-currentCode=
-code.toUpperCase();
-
-let p=
-products[currentCode];
-
-document.getElementById(
-"verifiedBrand"
-).innerText=
-p.brand;
-
-document.getElementById(
-"portalBrand"
-).innerText=
-p.brand;
-
-document.getElementById(
-"portalProduct"
-).innerText=
-p.product+
-" AUTHENTICATION PORTAL";
-
-document.getElementById(
-"manualCode"
-).innerText=
-currentCode;
-
-}
-
-else{
-
-currentCode=
-"LBR7F29K";
-
-}
-
-};
-
-function openPortal(){
-
-document.getElementById(
-"verifiedScreen"
-).style.display=
-"none";
-
-document.getElementById(
-"portalScreen"
-).style.display=
-"block";
-
-window.scrollTo({
-top:0,
-behavior:"smooth"
-});
-
-}
-
-function verifyProduct(){
-
-let input=
-document.getElementById(
-"verifyInput"
-);
-
-let value=
-input.value
-.trim()
-.toUpperCase();
-
-let result=
-document.getElementById(
-"resultBox"
-);
-
-result.style.display=
-"block";
-
-if(value===currentCode){
-
-result.innerHTML=
-"✅ PRODUCT VERIFIED";
-
-result.style.background=
-"#002b00";
-
-result.style.color=
-"#00ff00";
-
-result.style.border=
-"2px solid #00ff00";
-
-}
-
-else{
-
-result.innerHTML=
-"❌ PRODUCT FAILED";
-
-result.style.background=
-"#2b0000";
-
-result.style.color=
-"red";
-
-result.style.border=
-"2px solid red";
-
-}
-
-input.value="";
 
 }
 
