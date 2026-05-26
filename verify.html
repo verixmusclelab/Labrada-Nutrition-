@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Product Verification</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#0d0d0d;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+padding:20px;
+}
+
+.verify-box{
+background:#111;
+width:100%;
+max-width:420px;
+padding:40px 25px;
+border-radius:25px;
+text-align:center;
+border:3px solid #00ff00;
+box-shadow:0 0 25px #00ff00;
+animation:popup .3s ease;
+}
+
+@keyframes popup{
+
+0%{
+transform:scale(.7);
+opacity:0;
+}
+
+100%{
+transform:scale(1);
+opacity:1;
+}
+
+}
+
+.logo{
+font-size:36px;
+font-weight:bold;
+color:#ffcc00;
+margin-bottom:10px;
+}
+
+.small{
+color:#bbb;
+margin-bottom:25px;
+}
+
+#brand-name{
+font-size:28px;
+color:#ffcc00;
+margin-bottom:15px;
+font-weight:bold;
+}
+
+#verify-icon{
+font-size:80px;
+margin-bottom:15px;
+}
+
+#verify-status{
+font-size:28px;
+margin-bottom:10px;
+}
+
+#verify-msg{
+font-size:18px;
+color:#ddd;
+margin-bottom:25px;
+}
+
+.btn{
+display:inline-block;
+padding:14px 28px;
+background:#ffcc00;
+color:black;
+text-decoration:none;
+font-weight:bold;
+border-radius:12px;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="verify-box"
+id="verify-box">
+
+<div class="logo">
+BIGBROTHERS
+</div>
+
+<div class="small">
+Supplement Authenticity Check
+</div>
+
+<h1 id="brand-name">
+Checking...
+</h1>
+
+<div id="verify-icon">
+⏳
+</div>
+
+<h2 id="verify-status">
+Verifying Product
+</h2>
+
+<p id="verify-msg">
+Please wait...
+</p>
+
+<a href="./"
+class="btn">
+Open Website
+</a>
+
+</div>
+
+<script>
+
+const products={
+
+"LBR7F29K":"LABRADA NUTRITION",
+"TRU5MP91":"MUSCLETECH NITRO TECH",
+"ON84P2X":"OPTIMUM NUTRITION",
+"GNC3M78B":"GNC CREATINE",
+"PRE9W7K2":"MUSCLETECH PRE WORKOUT",
+"MUL4V8T1":"GNC MULTIVITAMIN",
+"FIS8O2L9":"MUSCLEBLAZE FISH OIL",
+"LMG5P62C":"LABRADA MASS GAINER"
+
+};
+
+const params=
+new URLSearchParams(
+window.location.search
+);
+
+const code=
+params.get("code");
+
+if(products[code]){
+
+document.getElementById(
+"brand-name"
+).innerText=
+products[code];
+
+document.getElementById(
+"verify-icon"
+).innerHTML="✅";
+
+document.getElementById(
+"verify-status"
+).innerHTML=
+"PRODUCT VERIFIED";
+
+document.getElementById(
+"verify-status"
+).style.color=
+"#00ff00";
+
+document.getElementById(
+"verify-msg"
+).innerHTML=
+"100% Authentic Product";
+
+document.getElementById(
+"verify-box"
+).style.border=
+"3px solid #00ff00";
+
+document.getElementById(
+"verify-box"
+).style.boxShadow=
+"0 0 25px #00ff00";
+
+}
+
+else{
+
+document.getElementById(
+"brand-name"
+).innerText=
+"UNKNOWN PRODUCT";
+
+document.getElementById(
+"verify-icon"
+).innerHTML="❌";
+
+document.getElementById(
+"verify-status"
+).innerHTML=
+"PRODUCT FAILED";
+
+document.getElementById(
+"verify-status"
+).style.color=
+"red";
+
+document.getElementById(
+"verify-msg"
+).innerHTML=
+"Invalid Product Code";
+
+document.getElementById(
+"verify-box"
+).style.border=
+"3px solid red";
+
+document.getElementById(
+"verify-box"
+).style.boxShadow=
+"0 0 25px red";
+
+}
+
+</script>
+
+</body>
+</html>
