@@ -684,7 +684,193 @@ WhatsApp Order
 
 </footer>
 
-<script src="script.js"></script>
+<script>
+
+/* MENU SECTION */
+
+function showSection(sectionId){
+
+let sections =
+document.querySelectorAll(".product-section");
+
+sections.forEach(function(section){
+
+section.classList.remove("active");
+
+});
+
+document.getElementById(sectionId)
+.classList.add("active");
+
+}
+
+/* PRODUCT DATABASE */
+
+const productDatabase = {
+
+"LBR7F29K":{
+brand:"LABRADA NUTRITION",
+status:"✅ PRODUCT VERIFIED SUCCESSFULLY",
+desc:"100% Authentic Product"
+},
+
+"ON84P2X":{
+brand:"OPTIMUM NUTRITION",
+status:"✅ PRODUCT VERIFIED SUCCESSFULLY",
+desc:"100% Authentic Product"
+},
+
+"MBZ9X14A":{
+brand:"MUSCLEBLAZE",
+status:"✅ PRODUCT VERIFIED SUCCESSFULLY",
+desc:"100% Authentic Product"
+},
+
+"GNC3M78B":{
+brand:"GNC",
+status:"✅ PRODUCT VERIFIED SUCCESSFULLY",
+desc:"100% Authentic Product"
+},
+
+"LMG5P62C":{
+brand:"LABRADA MASS GAINER",
+status:"✅ PRODUCT VERIFIED SUCCESSFULLY",
+desc:"100% Authentic Product"
+}
+
+};
+
+/* VERIFY FUNCTION */
+
+function triggerManualCheck(){
+
+let input =
+document.getElementById(
+"manualCodeInput"
+);
+
+let code =
+input.value
+.trim()
+.toUpperCase();
+
+if(code===""){
+
+alert("Please Enter Product Code");
+
+return;
+
+}
+
+showVerification(code);
+
+/* INPUT CLEAR */
+
+input.value="";
+
+}
+
+/* SHOW RESULT */
+
+function showVerification(code){
+
+document.getElementById(
+"verification-overlay"
+).style.display="flex";
+
+if(productDatabase[code]){
+
+document.getElementById(
+"dynamic-brand"
+).innerText =
+productDatabase[code].brand;
+
+document.getElementById(
+"dynamic-badge"
+).innerHTML =
+"✅";
+
+document.getElementById(
+"dynamic-status"
+).innerHTML =
+productDatabase[code].status;
+
+document.getElementById(
+"dynamic-desc"
+).innerText =
+productDatabase[code].desc;
+
+document.getElementById(
+"overlay-card"
+).style.border =
+"3px solid #00ff00";
+
+}
+
+else{
+
+document.getElementById(
+"dynamic-brand"
+).innerText =
+"UNKNOWN PRODUCT";
+
+document.getElementById(
+"dynamic-badge"
+).innerHTML =
+"❌";
+
+document.getElementById(
+"dynamic-status"
+).innerHTML =
+"PRODUCT VERIFICATION FAILED";
+
+document.getElementById(
+"dynamic-desc"
+).innerText =
+"Invalid Product Code";
+
+document.getElementById(
+"overlay-card"
+).style.border =
+"3px solid red";
+
+}
+
+}
+
+/* CLOSE POPUP */
+
+document.getElementById(
+"verification-overlay"
+).onclick=function(){
+
+this.style.display="none";
+
+}
+
+/* AUTO QR VERIFY */
+
+window.onload=function(){
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const code =
+params.get("code");
+
+if(code){
+
+showVerification(
+code.toUpperCase()
+);
+
+}
+
+}
+
+</script>
 
 </body>
 </html>
