@@ -3,327 +3,133 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Product Verification</title>
+<title>Verification</title>
 
 <style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#0b0b0b;color:#fff}
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial,sans-serif;
-}
-
-body{
-background:#0b0b0b;
-color:white;
-min-height:100vh;
-}
-
-#verifiedScreen,
-#portalScreen{
-min-height:100vh;
-display:flex;
-justify-content:center;
-align-items:center;
-padding:20px;
-}
-
-#portalScreen{
-display:none;
-}
+#verifiedScreen,#portalScreen{min-height:100vh;display:flex;justify-content:center;align-items:center}
 
 .card{
 background:#111;
 padding:30px;
-border-radius:25px;
-width:100%;
+border-radius:20px;
+border:2px solid #ffcc00;
+width:90%;
 max-width:400px;
 text-align:center;
-border:2px solid #ffcc00;
 }
 
 .brand{
-font-size:32px;
-font-weight:900;
-color:#ffcc00;
-margin-bottom:20px;
-text-transform:uppercase;
-}
-
-.verify-text{
-color:#00ff00;
-font-size:22px;
+font-size:24px;
 font-weight:bold;
-margin-top:10px;
+color:#ffcc00;
+margin-bottom:15px;
 }
 
 .btn{
 width:100%;
-padding:15px;
-border:none;
-border-radius:12px;
+padding:14px;
 background:#ffcc00;
-font-weight:bold;
-font-size:15px;
-cursor:pointer;
-margin-top:15px;
-}
-
-.code-box{
-background:#181818;
-border:2px dashed #ffcc00;
-padding:20px;
-border-radius:15px;
-margin:20px 0;
-}
-
-.verify-input{
-width:100%;
-padding:15px;
-border-radius:12px;
 border:none;
-font-size:16px;
-text-align:center;
+font-weight:bold;
+cursor:pointer;
+border-radius:10px;
 margin-top:10px;
 }
 
-#resultBox{
-margin-top:20px;
-font-weight:bold;
-font-size:18px;
-min-height:40px;
+.code-box{
+margin:20px 0;
+padding:15px;
+border:1px dashed #ffcc00;
+border-radius:12px;
+color:#00ff00;
 }
 
+input{
+width:100%;
+padding:12px;
+text-align:center;
+border-radius:10px;
+margin-top:10px;
+border:none;
+}
+
+#resultBox{margin-top:15px;font-weight:bold;}
 </style>
 </head>
 
 <body>
 
-<!-- SCREEN 1 -->
-
+<!-- SCAN SCREEN -->
 <div id="verifiedScreen">
-
-<div class="card">
-
-<div class="brand" id="screenBrand">
-LOADING...
+  <div class="card">
+    <div class="brand" id="scanBrand">BRAND</div>
+    <div style="font-size:50px">✅</div>
+    <div style="color:#00ff00;font-weight:bold">PRODUCT VERIFIED</div>
+    <button class="btn" onclick="openPortal()">OPEN WEBSITE</button>
+  </div>
 </div>
 
-<div style="font-size:65px;">✅</div>
+<!-- PORTAL -->
+<div id="portalScreen" style="display:none;">
+  <div class="card">
+    
+    <div class="brand" id="portalBrand">---</div>
 
-<div class="verify-text">
-PRODUCT VERIFIED
-</div>
+    <div class="code-box">
+      CODE: <span id="displayCode">---</span>
+    </div>
 
-<button class="btn" onclick="openPortal()">
-OPEN WEBSITE
-</button>
+    <input id="verifyInput" placeholder="Enter Code">
+    <button class="btn" onclick="verifyProduct()">VERIFY</button>
 
-</div>
-
-</div>
-
-<!-- SCREEN 2 -->
-
-<div id="portalScreen">
-
-<div class="card">
-
-<div class="brand" id="portalBrand">
-BRAND
-</div>
-
-<div class="code-box">
-
-<div style="font-size:13px;color:#888;">
-MANUAL VERIFICATION CODE
-</div>
-
-<div id="displayCode"
-style="font-size:30px;font-weight:bold;color:#00ff00;margin-top:10px;">
----
-</div>
-
-</div>
-
-<input type="text"
-id="verifyInput"
-class="verify-input"
-placeholder="ENTER PRODUCT CODE">
-
-<button class="btn"
-onclick="verifyProduct()">
-VERIFY PRODUCT
-</button>
-
-<div id="resultBox"></div>
-
-</div>
-
+    <div id="resultBox"></div>
+  </div>
 </div>
 
 <script>
-
 const products = {
-
-/* LABRADA */
-
-"LBRA7X9K1":"LABRADA NUTRITION",
-
-/* MUSCLETECH */
-
-"PRE9W7K2":"MUSCLETECH",
-"TRU5MP91":"MUSCLETECH",
-
-/* ON */
-
-"ON84P2X":"OPTIMUM NUTRITION",
-
-/* GNC */
-
-"GNC3M78B":"GNC",
-
-/* WELLCORE */
-
-"WEL7C91X":"WELLCORE",
-
-/* AVVATAR */
-
-"AVV7P9K2":"AVVATAR",
-
-/* BIGMUSCLES */
-
-"BIG7P2K8":"BIGMUSCLES"
-
+  "LBR7F29K": { brand:"LABRADA NUTRITION" },
+  "LMG5P62C": { brand:"LABRADA NUTRITION" },
+  "TRU5MP91": { brand:"MUSCLETECH" },
+  "PRE9W7K2": { brand:"MUSCLETECH" },
+  "ON84P2X": { brand:"OPTIMUM NUTRITION" },
+  "GNC3M78B": { brand:"GNC" },
+  "MUL4V8T1": { brand:"GNC" }
 };
 
-let currentCode = "";
-
 window.onload = function(){
+  const params = new URLSearchParams(window.location.search);
+  const code = params.get("code");
 
-const params =
-new URLSearchParams(window.location.search);
+  if(code && products[code.toUpperCase()]){
+    let p = products[code.toUpperCase()];
 
-const code =
-params.get("code");
-
-if(code && products[code.toUpperCase()]){
-
-currentCode = code.toUpperCase();
-
-const brand =
-products[currentCode];
-
-document.getElementById(
-"screenBrand"
-).innerText = brand;
-
-document.getElementById(
-"portalBrand"
-).innerText = brand;
-
-document.getElementById(
-"displayCode"
-).innerText = currentCode;
-
-}
-
-else{
-
-document.getElementById(
-"screenBrand"
-).innerText =
-"INVALID PRODUCT QR";
-
-}
-
+    document.getElementById("scanBrand").innerText = p.brand;
+    document.getElementById("portalBrand").innerText = p.brand;
+    document.getElementById("displayCode").innerText = code.toUpperCase();
+  }
 };
 
 function openPortal(){
-
-document.getElementById(
-"verifiedScreen"
-).style.display = "none";
-
-document.getElementById(
-"portalScreen"
-).style.display = "flex";
-
+  document.getElementById("verifiedScreen").style.display="none";
+  document.getElementById("portalScreen").style.display="flex";
 }
 
 function verifyProduct(){
+  let code = document.getElementById("verifyInput").value.trim().toUpperCase();
+  let box = document.getElementById("resultBox");
 
-let input =
-document.getElementById(
-"verifyInput"
-);
-
-let code =
-input.value.trim().toUpperCase();
-
-let box =
-document.getElementById(
-"resultBox"
-);
-
-if(products[code]){
-
-let used =
-parseInt(
-localStorage.getItem(
-"used_"+code
-)
-) || 0;
-
-if(used >= 2){
-
-box.innerHTML =
-"⚠️ ALREADY USED";
-
-box.style.color =
-"#ffcc00";
-
+  if(products[code]){
+    box.innerHTML = "✅ VERIFIED - " + products[code].brand;
+    box.style.color = "#00ff00";
+  } else {
+    box.innerHTML = "❌ INVALID CODE";
+    box.style.color = "red";
+  }
 }
-
-else{
-
-used++;
-
-localStorage.setItem(
-"used_"+code,
-used
-);
-
-box.innerHTML =
-"✅ VERIFIED<br>" +
-products[code] +
-"<br>Usage: " +
-used +
-"/2";
-
-box.style.color =
-"#00ff00";
-
-}
-
-}
-
-else{
-
-box.innerHTML =
-"❌ INVALID CODE";
-
-box.style.color =
-"red";
-
-}
-
-input.value = "";
-input.focus();
-
-}
-
 </script>
 
 </body>
