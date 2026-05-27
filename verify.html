@@ -3,133 +3,330 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Verification</title>
+<title>Product Verification</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#0b0b0b;color:#fff}
 
-#verifiedScreen,#portalScreen{min-height:100vh;display:flex;justify-content:center;align-items:center}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
 
+body{
+background:#0b0b0b;
+color:white;
+min-height:100vh;
+}
+
+/* SCAN SCREEN + PORTAL */
+#verifiedScreen,
+#portalScreen{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+/* CARD */
 .card{
 background:#111;
 padding:30px;
-border-radius:20px;
-border:2px solid #ffcc00;
-width:90%;
+border-radius:25px;
+width:100%;
 max-width:400px;
 text-align:center;
+border:2px solid #ffcc00;
+box-shadow:0 0 20px rgba(255,204,0,0.2);
 }
 
+/* BRAND */
 .brand{
-font-size:24px;
-font-weight:bold;
+font-size:34px;
+font-weight:900;
 color:#ffcc00;
-margin-bottom:15px;
+margin-bottom:20px;
+line-height:1.2;
+text-transform:uppercase;
 }
 
+/* VERIFY TEXT */
+.verify-text{
+color:#00ff00;
+font-size:22px;
+font-weight:bold;
+margin-top:10px;
+}
+
+/* BUTTON */
 .btn{
 width:100%;
-padding:14px;
-background:#ffcc00;
-border:none;
-font-weight:bold;
-cursor:pointer;
-border-radius:10px;
-margin-top:10px;
-}
-
-.code-box{
-margin:20px 0;
 padding:15px;
-border:1px dashed #ffcc00;
-border-radius:12px;
-color:#00ff00;
-}
-
-input{
-width:100%;
-padding:12px;
-text-align:center;
-border-radius:10px;
-margin-top:10px;
 border:none;
+border-radius:12px;
+background:#ffcc00;
+font-weight:bold;
+font-size:15px;
+cursor:pointer;
+margin-top:15px;
 }
 
-#resultBox{margin-top:15px;font-weight:bold;}
+/* CODE BOX */
+.code-box{
+background:#181818;
+border:2px dashed #ffcc00;
+padding:20px;
+border-radius:15px;
+margin:20px 0;
+}
+
+/* INPUT */
+.verify-input{
+width:100%;
+padding:15px;
+border-radius:12px;
+border:none;
+outline:none;
+font-size:16px;
+text-align:center;
+margin-top:10px;
+}
+
+/* RESULT */
+#resultBox{
+margin-top:20px;
+font-weight:bold;
+font-size:18px;
+min-height:40px;
+}
+
 </style>
 </head>
 
 <body>
 
-<!-- SCAN SCREEN -->
+<!-- FIRST SCREEN -->
 <div id="verifiedScreen">
-  <div class="card">
-    <div class="brand" id="scanBrand">BRAND</div>
-    <div style="font-size:50px">✅</div>
-    <div style="color:#00ff00;font-weight:bold">PRODUCT VERIFIED</div>
-    <button class="btn" onclick="openPortal()">OPEN WEBSITE</button>
-  </div>
+
+<div class="card">
+
+<div class="brand" id="screenBrand">
+LABRADA NUTRITION
+</div>
+
+<div style="font-size:65px;">✅</div>
+
+<div class="verify-text">
+PRODUCT VERIFIED
+</div>
+
+<button class="btn" onclick="openPortal()">
+OPEN WEBSITE
+</button>
+
+</div>
+
 </div>
 
 <!-- PORTAL -->
 <div id="portalScreen" style="display:none;">
-  <div class="card">
-    
-    <div class="brand" id="portalBrand">---</div>
 
-    <div class="code-box">
-      CODE: <span id="displayCode">---</span>
-    </div>
+<div class="card">
 
-    <input id="verifyInput" placeholder="Enter Code">
-    <button class="btn" onclick="verifyProduct()">VERIFY</button>
+<div class="brand" id="portalBrand">
+LABRADA NUTRITION
+</div>
 
-    <div id="resultBox"></div>
-  </div>
+<div class="code-box">
+
+<div style="font-size:13px;color:#888;">
+MANUAL VERIFICATION CODE
+</div>
+
+<div id="displayCode"
+style="font-size:28px;
+color:#00ff00;
+margin-top:10px;
+font-weight:bold;">
+---
+</div>
+
+</div>
+
+<input type="text"
+id="verifyInput"
+class="verify-input"
+placeholder="ENTER PRODUCT CODE">
+
+<button class="btn"
+onclick="verifyProduct()">
+VERIFY PRODUCT
+</button>
+
+<div id="resultBox"></div>
+
+</div>
+
 </div>
 
 <script>
+
+/* PRODUCTS */
+
 const products = {
-  "LBR7F29K": { brand:"LABRADA NUTRITION" },
-  "LMG5P62C": { brand:"LABRADA NUTRITION" },
-  "TRU5MP91": { brand:"MUSCLETECH" },
-  "PRE9W7K2": { brand:"MUSCLETECH" },
-  "ON84P2X": { brand:"OPTIMUM NUTRITION" },
-  "GNC3M78B": { brand:"GNC" },
-  "MUL4V8T1": { brand:"GNC" }
+
+"LBR7F29K":{
+brand:"LABRADA NUTRITION"
+},
+
+"LMG5P62C":{
+brand:"LABRADA NUTRITION"
+},
+
+"TRU5MP91":{
+brand:"MUSCLETECH"
+},
+
+"PRE9W7K2":{
+brand:"MUSCLETECH"
+},
+
+"ON84P2X":{
+brand:"OPTIMUM NUTRITION"
+},
+
+"GNC3M78B":{
+brand:"GNC"
+},
+
+"MUL4V8T1":{
+brand:"GNC"
+},
+
+"WEL7C91X":{
+brand:"WELLCORE"
+}
+
 };
+
+/* QR AUTO DETECT */
 
 window.onload = function(){
-  const params = new URLSearchParams(window.location.search);
-  const code = params.get("code");
 
-  if(code && products[code.toUpperCase()]){
-    let p = products[code.toUpperCase()];
+const params = new URLSearchParams(window.location.search);
 
-    document.getElementById("scanBrand").innerText = p.brand;
-    document.getElementById("portalBrand").innerText = p.brand;
-    document.getElementById("displayCode").innerText = code.toUpperCase();
-  }
+const code = params.get("code");
+
+if(code && products[code.toUpperCase()]){
+
+let p = products[code.toUpperCase()];
+
+/* SCAN SCREEN BRAND */
+document.getElementById("screenBrand").innerText = p.brand;
+
+/* PORTAL BRAND */
+document.getElementById("portalBrand").innerText = p.brand;
+
+/* CODE SHOW */
+document.getElementById("displayCode").innerText =
+code.toUpperCase();
+
+}
+
 };
 
+/* OPEN WEBSITE */
+
 function openPortal(){
-  document.getElementById("verifiedScreen").style.display="none";
-  document.getElementById("portalScreen").style.display="flex";
+
+document.getElementById("verifiedScreen").style.display="none";
+
+document.getElementById("portalScreen").style.display="flex";
+
 }
+
+/* VERIFY */
 
 function verifyProduct(){
-  let code = document.getElementById("verifyInput").value = "";
-  let code = document.getElementById("verifyInput").focus();
 
-  if(products[code]){
-    box.innerHTML = "✅ VERIFIED - " + products[code].brand;
-    box.style.color = "#00ff00";
-  } else {
-    box.innerHTML = "❌ INVALID CODE";
-    box.style.color = "red";
-  }
+let input =
+document.getElementById("verifyInput");
+
+let code =
+input.value.trim().toUpperCase();
+
+let box =
+document.getElementById("resultBox");
+
+/* VALID CODE */
+
+if(products[code]){
+
+let used =
+parseInt(localStorage.getItem("used_"+code))
+|| 0;
+
+/* LIMIT REACHED */
+
+if(used >= 2){
+
+box.innerHTML =
+"⚠️ ALREADY USED";
+
+box.style.color =
+"#ffcc00";
+
 }
+
+/* VERIFY SUCCESS */
+
+else{
+
+used++;
+
+localStorage.setItem(
+"used_"+code,
+used
+);
+
+box.innerHTML =
+"✅ VERIFIED<br>" +
+products[code].brand +
+"<br>Usage: " +
+used +
+"/2";
+
+box.style.color =
+"#00ff00";
+
+}
+
+}
+
+/* INVALID */
+
+else{
+
+box.innerHTML =
+"❌ INVALID CODE";
+
+box.style.color =
+"red";
+
+}
+
+/* AUTO CLEAR */
+
+input.value = "";
+
+/* AUTO FOCUS */
+
+input.focus();
+
+}
+
 </script>
 
 </body>
