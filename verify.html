@@ -211,7 +211,7 @@ document.getElementById("displayCode")
 
 }
 
-/* INVALID QR */
+/* INVALID QR Or Fake Product */
 
 else{
 
@@ -258,7 +258,7 @@ localStorage.getItem("used_"+code)
 
 /* LIMIT */
 
-if(used >= 2){
+if(used >= 20){
 
 box.innerHTML =
 "⚠️ ALREADY USED";
@@ -286,7 +286,7 @@ products[code].brand +
 "Thank You For Choosing<br>" +
 products[code].brand +
 "<br><br>" +
-"Usage: " + used + "/2";
+"Usage: " + used + "/20";
 
 box.style.color =
 "#00ff00";
