@@ -117,18 +117,79 @@ function openPortal(){
   document.getElementById("verifiedScreen").style.display="none";
   document.getElementById("portalScreen").style.display="flex";
 }
-
 function verifyProduct(){
-  let code = document.getElementById("verifyInput").value.trim().toUpperCase();
-  let box = document.getElementById("resultBox");
+
+  let code =
+  document.getElementById("verifyInput")
+  .value.trim().toUpperCase();
+
+  let box =
+  document.getElementById("resultBox");
+
+  /* VALID CODE */
 
   if(products[code]){
-    box.innerHTML = "✅ VERIFIED - " + products[code].brand;
-    box.style.color = "#00ff00";
-  } else {
-    box.innerHTML = "❌ INVALID CODE";
-    box.style.color = "red";
+
+    let used =
+    parseInt(
+      localStorage.getItem("used_"+code)
+    ) || 0;
+
+    /* LIMIT REACHED */
+
+    if(used >= 2){
+
+      box.innerHTML =
+      "⚠️ ALREADY USED";
+
+      box.style.color =
+      "#ffcc00";
+
+    }
+
+    /* VERIFIED */
+
+    else{
+
+      used++;
+
+      localStorage.setItem(
+        "used_"+code,
+        used
+      );
+
+      box.innerHTML =
+      "✅ VERIFIED - " +
+      products[code].brand +
+      " (" + used + "/2)";
+
+      box.style.color =
+      "#00ff00";
+
+    }
+
   }
+
+  /* INVALID */
+
+  else{
+
+    box.innerHTML =
+    "❌ INVALID CODE";
+
+    box.style.color =
+    "red";
+
+  }
+
+  /* AUTO CLEAR */
+
+  document.getElementById(
+    "verifyInput"
+  ).value = "";
+
+}
+
 }
 </script>
 
