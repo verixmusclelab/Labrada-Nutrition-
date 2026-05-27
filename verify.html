@@ -1,78 +1,166 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verification Portal</title>
-    <style>
-        * { margin:0; padding:0; box-sizing:border-box; font-family:Arial,sans-serif; }
-        body { background:#0b0b0b; color:white; min-height:100vh; }
-        
-        /* Popup Design */
-        #verifiedScreen { display:flex; justify-content:center; align-items:center; height:100vh; padding:20px; position:fixed; top:0; left:0; width:100%; background:rgba(0,0,0,0.8); z-index:1000; }
-        .popup-card { background:#111; padding:30px; border-radius:20px; width:100%; max-width:350px; text-align:center; border:2px solid #ffcc00; box-shadow: 0 0 20px rgba(255,204,0,0.3); }
-        .popup-brand { font-size:22px; font-weight:bold; color:#ffcc00; margin-bottom:15px; }
-        .popup-icon { font-size:50px; margin-bottom:10px; }
-        .popup-status { font-size:20px; font-weight:bold; color:#00ff00; margin-bottom:10px; }
-        .popup-msg { font-size:14px; color:#ddd; margin-bottom:20px; }
-        .popup-btn { background:#ffcc00; color:black; border:none; padding:12px 40px; border-radius:8px; font-weight:bold; cursor:pointer; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Verification Portal</title>
 
-        /* Portal Design */
-        #portalScreen { padding:40px 20px; display:none; }
-        .card { max-width:400px; margin:auto; background:#111; padding:30px; border-radius:20px; border:2px solid #ffcc00; text-align:center; }
-        .verify-input { width:100%; padding:15px; border-radius:10px; border:none; margin-bottom:15px; text-align:center; }
-        .btn { width:100%; padding:15px; border:none; border-radius:10px; background:#ffcc00; font-weight:bold; cursor:pointer; }
-    </style>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
+body{background:#0b0b0b;color:#fff}
+
+/* Popup */
+#verifiedScreen{
+display:none;
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:rgba(0,0,0,0.8);
+justify-content:center;
+align-items:center;
+z-index:1000;
+}
+
+.popup-card{
+background:#111;
+padding:25px;
+border-radius:18px;
+text-align:center;
+width:90%;
+max-width:360px;
+border:2px solid #ffcc00;
+}
+
+.popup-brand{color:#ffcc00;font-size:22px;font-weight:bold}
+.popup-status{color:#00ff00;font-size:18px;margin-top:10px}
+.popup-msg{color:#ccc;margin:10px 0}
+button{cursor:pointer}
+
+/* Portal */
+.card{
+max-width:400px;
+margin:80px auto;
+background:#111;
+padding:25px;
+border-radius:15px;
+border:2px solid #ffcc00;
+text-align:center;
+}
+
+input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border-radius:8px;
+text-align:center;
+}
+
+.btn{
+width:100%;
+padding:12px;
+background:#ffcc00;
+border:none;
+font-weight:bold;
+}
+</style>
 </head>
+
 <body>
 
-<!-- Verified Popup Screen -->
-<div id="verifiedScreen" style="display:none;">
-    <div class="popup-card">
-        <div class="popup-brand" id="popupBrand">BRAND NAME</div>
-        <div class="popup-icon">✅</div>
-        <div class="popup-status">PRODUCT VERIFIED SUCCESSFULLY</div>
-        <div class="popup-msg" id="thankMsg">Thank You for Choosing Us</div>
-        <button class="popup-btn" onclick="document.getElementById('verifiedScreen').style.display='none'">Close</button>
-    </div>
+<!-- POPUP -->
+<div id="verifiedScreen">
+  <div class="popup-card">
+    <div class="popup-brand" id="popupBrand">BRAND</div>
+    <div class="popup-status" id="popupStatus">PRODUCT VERIFIED SUCCESSFULLY</div>
+    <div class="popup-msg" id="popupMsg">Your Product is Authentic</div>
+
+    <button class="btn" onclick="openManual()">OPEN VERIFICATION PAGE</button>
+    <button class="btn" style="margin-top:10px;background:#333;color:#fff"
+            onclick="closePopup()">CLOSE</button>
+  </div>
 </div>
 
-<!-- Portal Screen -->
-<div id="portalScreen" style="display:block;">
-    <div class="card">
-        <div class="popup-brand" id="portalBrand">PORTAL</div>
-        <input type="text" id="verifyInput" class="verify-input" placeholder="Enter Product Code">
-        <button class="btn" onclick="verifyProduct()">VERIFY PRODUCT</button>
-        <div id="resultBox" style="margin-top:20px; font-weight:bold;"></div>
-    </div>
+<!-- Verification -->
+<div class="card">
+  <h2>Verification</h2>
+  <input id="verifyInput" placeholder="Enter Product Code">
+  <button class="btn" onclick="verifyProduct()">VERIFY</button>
+  <div id="resultBox"></div>
 </div>
 
 <script>
-    const products = {
-        "LBR7F29K": { brand: "LABRADA NUTRITION", product: "WHEY PROTEIN" },
-        "LMG5P62C": { brand: "LABRADA NUTRITION", product: "" },
-        "TRU5MP91": { brand: "MUSCLETECH", product: "NITRO TECH" },
-        "ON84P2X": { brand: "OPTIMUM NUTRITION", product: "GOLD STANDARD" }
-    };
+const products = {
+  "LBR7F29K": { brand:"LABRADA NUTRITION", url:"https://example.com/labrada" },
+  "TRU5MP91": { brand:"MUSCLETECH", url:"https://example.com/muscletech" },
+  "ON84P2X": { brand:"OPTIMUM NUTRITION", url:"https://example.com/on" }
+};
 
-    function verifyProduct() {
-        let code = document.getElementById("verifyInput").value.trim().toUpperCase();
-        let result = document.getElementById("resultBox");
-        
-        if (products[code]) {
-            let p = products[code];
-            // Popup mein brand name set karein
-            document.getElementById("popupBrand").innerText = p.brand;
-            document.getElementById("verifiedScreen").style.display = "flex";
-            
-            // Result box mein message
-            result.innerHTML = "✅ Verified!";
-            result.style.color = "#00ff00";
-        } else {
-            result.innerHTML = "❌ INVALID CODE";
-            result.style.color = "red";
-        }
+/* attempts storage */
+function getAttempts(code){
+  return Number(sessionStorage.getItem(code+"_attempts") || 0);
+}
+
+function setAttempts(code,val){
+  sessionStorage.setItem(code+"_attempts",val);
+}
+
+function isBlocked(code){
+  return sessionStorage.getItem(code+"_blocked") === "true";
+}
+
+function blockCode(code){
+  sessionStorage.setItem(code+"_blocked","true");
+}
+
+/* VERIFY */
+function verifyProduct(){
+  let code = document.getElementById("verifyInput").value.trim().toUpperCase();
+  let box = document.getElementById("resultBox");
+
+  if(isBlocked(code)){
+    box.innerHTML="❌ ALREADY USED / BLOCKED";
+    box.style.color="red";
+    return;
+  }
+
+  if(!products[code]){
+    let a = getAttempts(code)+1;
+    setAttempts(code,a);
+
+    if(a>=3){
+      blockCode(code);
+      box.innerHTML="❌ FAILED - LIMIT EXCEEDED";
+    }else{
+      box.innerHTML=`❌ INVALID CODE (${a}/3)`;
     }
+    box.style.color="red";
+    return;
+  }
+
+  /* SUCCESS */
+  let p = products[code];
+
+  document.getElementById("popupBrand").innerText = p.brand;
+  document.getElementById("popupMsg").innerText = "Your Product Verified";
+
+  document.getElementById("verifiedScreen").style.display="flex";
+
+  box.innerHTML="✅ VERIFIED";
+  box.style.color="lime";
+}
+
+/* popup controls */
+function closePopup(){
+  document.getElementById("verifiedScreen").style.display="none";
+}
+
+function openManual(){
+  let code = document.getElementById("verifyInput").value.trim().toUpperCase();
+  if(products[code]){
+    window.open(products[code].url,"_blank");
+  }
+}
 </script>
+
 </body>
 </html>
