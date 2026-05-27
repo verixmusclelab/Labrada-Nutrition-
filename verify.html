@@ -3,32 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Professional Product Verification</title>
+    <title>Product Verification Portal</title>
     <style>
         * { margin:0; padding:0; box-sizing:border-box; font-family:Arial,sans-serif; }
         body { background:#0b0b0b; color:white; min-height:100vh; }
+        
         #verifiedScreen { display:flex; justify-content:center; align-items:center; height:100vh; padding:20px; }
         #portalScreen { display:none; padding:30px 20px; min-height:100vh; }
+        
         .card { background:#111; padding:30px; border-radius:25px; width:100%; max-width:400px; text-align:center; border:2px solid #ffcc00; margin:auto; }
         .brand { font-size:24px; font-weight:bold; color:#ffcc00; margin-bottom:5px; }
-        .product-name { font-size:20px; color:#fff; margin-bottom:15px; }
+        .product-name { font-size:18px; color:#fff; margin-bottom:15px; }
+        
         .code-box { background:#181818; border:2px dashed #ffcc00; padding:20px; border-radius:15px; margin:20px 0; }
         .verify-input { width:100%; padding:15px; border-radius:10px; border:none; margin-bottom:15px; text-align:center; font-size:16px; }
         .btn { width:100%; padding:15px; border:none; border-radius:10px; background:#ffcc00; font-weight:bold; cursor:pointer; }
+        
         #resultBox { display:none; margin-top:20px; padding:15px; border-radius:10px; font-weight:bold; }
     </style>
 </head>
 <body>
 
+<!-- SCREEN 1: VERIFIED POPUP -->
 <div id="verifiedScreen">
     <div class="card">
-        <div class="brand" id="screen1Brand">AUTHENTIC PRODUCT</div>
+        <div class="brand" id="verifiedBrand">BRAND NAME</div>
         <div style="font-size:50px; margin:10px 0;">✅</div>
-        <div style="color:#00ff00; font-size:20px; font-weight:bold;">PRODUCT VERIFIED</div>
-        <br><button class="btn" onclick="openPortal()">OPEN PORTAL</button>
+        <div style="color:#00ff00; font-size:20px; font-weight:bold;">PRODUCT VERIFIED SUCCESSFULLY</div>
+        <div style="font-size:14px; margin:10px 0; color:#ddd;">100% Authentic Product</div>
+        <button class="btn" onclick="openPortal()">CLOSE</button>
     </div>
 </div>
 
+<!-- SCREEN 2: PORTAL -->
 <div id="portalScreen">
     <div class="card">
         <div class="brand" id="portalBrand">BRAND NAME</div>
@@ -43,7 +50,6 @@
         <button class="btn" onclick="verifyProduct()">VERIFY PRODUCT</button>
         <div id="resultBox"></div>
         
-        <!-- Testing ke liye reset button -->
         <button style="margin-top:20px; background:none; border:none; color:#444; cursor:pointer; font-size:10px;" 
                 onclick="localStorage.clear(); alert('Data Reset!'); location.reload();">RESET TESTING DATA</button>
     </div>
@@ -66,6 +72,7 @@
         const code = params.get("code");
         if (code && products[code.toUpperCase()]) {
             let p = products[code.toUpperCase()];
+            document.getElementById("verifiedBrand").innerText = p.brand;
             document.getElementById("displayCode").innerText = code.toUpperCase();
             document.getElementById("portalBrand").innerText = p.brand;
             document.getElementById("portalProduct").innerText = p.product;
