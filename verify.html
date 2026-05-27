@@ -3,90 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Product Verification Portal</title>
+    <title>Authentication Portal</title>
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; font-family:Arial,sans-serif; }
-        body { background:#0b0b0b; color:white; min-height:100vh; }
-        
-        #verifiedScreen { display:none; justify-content:center; align-items:center; height:100vh; padding:20px; position:fixed; top:0; left:0; width:100%; background:rgba(0,0,0,0.95); z-index:9999; }
-        #portalScreen { display:none; padding:30px 20px; min-height:100vh; }
-        
-        .card { background:#111; padding:30px; border-radius:25px; width:100%; max-width:400px; text-align:center; border:2px solid #ffcc00; margin:auto; }
-        .brand { font-size:24px; font-weight:bold; color:#ffcc00; margin-bottom:5px; }
-        .btn { width:100%; padding:15px; border:none; border-radius:10px; background:#ffcc00; font-weight:bold; cursor:pointer; margin-top:20px; }
-        .verify-input { width:100%; padding:15px; border-radius:10px; border:none; margin-bottom:15px; text-align:center; font-size:16px; }
-        #resultBox { display:none; margin-top:20px; padding:15px; border-radius:10px; font-weight:bold; }
+        body { background:#0b0b0b; color:white; display:flex; justify-content:center; align-items:center; min-height:100vh; margin:0; }
+        .card { background:#111; padding:25px; border-radius:15px; border:1px solid #ffcc00; width:90%; max-width:350px; text-align:center; }
+        .title { color:#ffcc00; font-weight:bold; margin-bottom:15px; }
+        .code-box { border:1px dashed #ffcc00; padding:15px; margin-bottom:15px; border-radius:5px; }
+        .verify-input { width:100%; padding:12px; border-radius:5px; border:none; margin-bottom:10px; text-align:center; }
+        .btn { width:100%; padding:12px; border:none; border-radius:5px; background:#ffcc00; font-weight:bold; cursor:pointer; color:black; }
+        #resultBox { margin-top:15px; padding:10px; border-radius:5px; display:none; font-weight:bold; }
     </style>
 </head>
 <body>
 
-<div id="verifiedScreen">
-    <div class="card">
-        <div class="brand" id="verifiedBrand">BRAND NAME</div>
-        <div style="font-size:50px; margin:10px 0;">✅</div>
-        <div style="color:#00ff00; font-size:20px; font-weight:bold;">PRODUCT VERIFIED SUCCESSFULLY</div>
-        <button class="btn" onclick="openPortal()">OPEN WEBSITE</button>
+<div class="card">
+    <div class="title">AUTHENTICATION PORTAL</div>
+    <div class="code-box">
+        <div style="font-size:10px; color:#aaa;">MANUAL VERIFICATION CODE</div>
+        <div style="color:#0f0; margin-top:5px;">SCAN QR CODE</div>
     </div>
-</div>
-
-<div id="portalScreen">
-    <div class="card">
-        <div class="brand">PORTAL</div>
-        <div id="resultBox"></div>
-        <input type="text" id="verifyInput" class="verify-input" placeholder="Enter Code">
-        <button class="btn" onclick="verifyProduct()">VERIFY PRODUCT</button>
-    </div>
+    <input type="text" id="verifyInput" class="verify-input" placeholder="Enter Product Code">
+    <button class="btn" onclick="verifyProduct()">VERIFY PRODUCT</button>
+    <div id="resultBox"></div>
 </div>
 
 <script>
     const products = {
-        "LBR7F29K": { brand: "LABRADA", product: "WHEY" },
-        "ON84P2X": { brand: "OPTIMUM", product: "GOLD STANDARD" }
+        "ON84P2X": "OPTIMUM NUTRITION",
+        "LBR7F29K": "LABRADA NUTRITION"
     };
-
-    // Auto-generate 100 codes
-    for(let i = 1; i <= 100; i++) {
-        products["LBR-" + (1000 + i)] = { brand: "LABRADA NUTRITION", product: "PREMIUM WHEY" };
-    }
-
-    window.onload = function() {
-        const params = new URLSearchParams(window.location.search);
-        const code = params.get("code");
-        
-        if (code && products[code.toUpperCase()]) {
-            let p = products[code.toUpperCase()];
-            document.getElementById("verifiedBrand").innerText = p.brand;
-            document.getElementById("verifiedScreen").style.display = "flex";
-        } else {
-            document.getElementById("portalScreen").style.display = "block";
-        }
-    };
-
-    function openPortal() {
-        document.getElementById("verifiedScreen").style.display = "none";
-        document.getElementById("portalScreen").style.display = "block";
-        
-        const params = new URLSearchParams(window.location.search);
-        const code = params.get("code");
-        if(code && products[code.toUpperCase()]) {
-            let p = products[code.toUpperCase()];
-            let res = document.getElementById("resultBox");
-            res.style.display = "block";
-            res.innerHTML = "✅ " + p.brand + "<br>Status: Authentic";
-            res.style.background = "#002b00"; res.style.color = "#00ff00";
-        }
-    }
+    for(let i = 1; i <= 100; i++) { products["LBR-" + (1000 + i)] = "LABRADA NUTRITION"; }
 
     function verifyProduct() {
         let code = document.getElementById("verifyInput").value.trim().toUpperCase();
         let res = document.getElementById("resultBox");
         res.style.display = "block";
-        if (products[code]) {
-            res.innerHTML = "✅ " + products[code].brand + "<br>Verified!";
-            res.style.background = "#002b00"; res.style.color = "#00ff00";
-        } else {
+
+        if (!products[code]) {
             res.innerHTML = "❌ INVALID CODE";
-            res.style.background = "#2b0000"; res.style.color = "red";
+            res.style.background = "#400"; res.style.color = "red";
+            return;
+        }
+
+        let count = parseInt(localStorage.getItem("usage_" + code)) || 0;
+        if (count < 3) {
+            count++;
+            localStorage.setItem("usage_" + code, count);
+            res.innerHTML = "✅ " + products[code] + "<br>Thanks for choosing " + products[code] + "!<br>Verification: " + count + "/3";
+            res.style.background = "#020"; res.style.color = "#0f0";
+        } else {
+            res.innerHTML = "⚠️ ALREADY USED (3/3)";
+            res.style.background = "#420"; res.style.color = "#ff0";
         }
     }
 </script>
