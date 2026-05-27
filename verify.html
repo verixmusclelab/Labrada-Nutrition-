@@ -119,8 +119,8 @@ function openPortal(){
 }
 
 function verifyProduct(){
-  let code = document.getElementById("verifyInput").value.trim().toUpperCase();
-  let box = document.getElementById("resultBox");
+  let code = document.getElementById("verifyInput").value = "";
+  let code = document.getElementById("verifyInput").focus();
 
   if(products[code]){
     box.innerHTML = "✅ VERIFIED - " + products[code].brand;
