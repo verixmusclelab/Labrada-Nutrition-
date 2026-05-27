@@ -6,10 +6,35 @@
 <title>Verification</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Arial}
-body{background:#0b0b0b;color:#fff}
 
-#verifiedScreen,#portalScreen{min-height:100vh;display:flex;justify-content:center;align-items:center}
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial;
+}
+
+body{
+background:#0b0b0b;
+color:#fff;
+}
+
+/* SCREENS */
+
+#verifiedScreen,
+#portalScreen{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+}
+
+#portalScreen{
+display:none;
+}
+
+/* CARD */
 
 .card{
 background:#111;
@@ -21,12 +46,16 @@ max-width:400px;
 text-align:center;
 }
 
+/* BRAND */
+
 .brand{
 font-size:24px;
 font-weight:bold;
 color:#ffcc00;
 margin-bottom:15px;
 }
+
+/* BUTTON */
 
 .btn{
 width:100%;
@@ -39,13 +68,19 @@ border-radius:10px;
 margin-top:10px;
 }
 
+/* CODE BOX */
+
 .code-box{
 margin:20px 0;
 padding:15px;
 border:1px dashed #ffcc00;
 border-radius:12px;
 color:#00ff00;
+font-size:20px;
+font-weight:bold;
 }
+
+/* INPUT */
 
 input{
 width:100%;
@@ -54,143 +89,227 @@ text-align:center;
 border-radius:10px;
 margin-top:10px;
 border:none;
+font-size:16px;
 }
 
-#resultBox{margin-top:15px;font-weight:bold;}
+/* RESULT */
+
+#resultBox{
+margin-top:15px;
+font-weight:bold;
+font-size:18px;
+min-height:40px;
+}
+
 </style>
 </head>
 
 <body>
 
 <!-- SCAN SCREEN -->
+
 <div id="verifiedScreen">
-  <div class="card">
-    <div class="brand" id="scanBrand">BRAND</div>
-    <div style="font-size:50px">✅</div>
-    <div style="color:#00ff00;font-weight:bold">PRODUCT VERIFIED</div>
-    <button class="btn" onclick="openPortal()">OPEN WEBSITE</button>
-  </div>
+
+<div class="card">
+
+<div class="brand" id="scanBrand">
+BRAND
 </div>
 
-<!-- PORTAL -->
-<div id="portalScreen" style="display:none;">
-  <div class="card">
-    
-    <div class="brand" id="portalBrand">---</div>
+<div style="font-size:50px">
+✅
+</div>
 
-    <div class="code-box">
-      CODE: <span id="displayCode">---</span>
-    </div>
+<div style="color:#00ff00;font-weight:bold;margin-top:10px;">
+PRODUCT VERIFIED
+</div>
 
-    <input id="verifyInput" placeholder="Enter Code">
-    <button class="btn" onclick="verifyProduct()">VERIFY</button>
+<button class="btn" onclick="openPortal()">
+OPEN WEBSITE
+</button>
 
-    <div id="resultBox"></div>
-  </div>
+</div>
+
+</div>
+
+<!-- PORTAL SCREEN -->
+
+<div id="portalScreen">
+
+<div class="card">
+
+<div class="brand" id="portalBrand">
+---
+</div>
+
+<div class="code-box">
+CODE:
+<span id="displayCode">---</span>
+</div>
+
+<input
+type="text"
+id="verifyInput"
+placeholder="Enter Code">
+
+<button class="btn" onclick="verifyProduct()">
+VERIFY
+</button>
+
+<div id="resultBox"></div>
+
+</div>
+
 </div>
 
 <script>
+
+/* PRODUCTS */
+
 const products = {
-  "LBR7F29K": { brand:"LABRADA NUTRITION" },
-  "LMG5P62C": { brand:"LABRADA NUTRITION" },
-  "TRU5MP91": { brand:"MUSCLETECH" },
-  "PRE9W7K2": { brand:"MUSCLETECH" },
-  "ON84P2X": { brand:"OPTIMUM NUTRITION" },
-  "GNC3M78B": { brand:"GNC" },
-  "MUL4V8T1": { brand:"GNC" }
+
+"LBR7F29K": { brand:"LABRADA NUTRITION" },
+"LMG5P62C": { brand:"LABRADA NUTRITION" },
+
+"TRU5MP91": { brand:"MUSCLETECH" },
+"PRE9W7K2": { brand:"MUSCLETECH" },
+
+"ON84P2X": { brand:"OPTIMUM NUTRITION" },
+
+"GNC3M78B": { brand:"GNC" },
+"MUL4V8T1": { brand:"GNC" }
+
 };
+
+/* QR AUTO DETECT */
 
 window.onload = function(){
-  const params = new URLSearchParams(window.location.search);
-  const code = params.get("code");
 
-  if(code && products[code.toUpperCase()]){
-    let p = products[code.toUpperCase()];
+const params =
+new URLSearchParams(window.location.search);
 
-    document.getElementById("scanBrand").innerText = p.brand;
-    document.getElementById("portalBrand").innerText = p.brand;
-    document.getElementById("displayCode").innerText = code.toUpperCase();
-  }
+const code =
+params.get("code");
+
+if(code && products[code.toUpperCase()]){
+
+let p =
+products[code.toUpperCase()];
+
+/* BRAND */
+
+document.getElementById("scanBrand")
+.innerText = p.brand;
+
+document.getElementById("portalBrand")
+.innerText = p.brand;
+
+/* MANUAL CODE */
+
+document.getElementById("displayCode")
+.innerText = code.toUpperCase();
+
+}
+
+/* INVALID QR */
+
+else{
+
+document.getElementById("scanBrand")
+.innerText = "INVALID PRODUCT QR";
+
+}
+
 };
 
+/* OPEN WEBSITE */
+
 function openPortal(){
-  document.getElementById("verifiedScreen").style.display="none";
-  document.getElementById("portalScreen").style.display="flex";
+
+document.getElementById("verifiedScreen")
+.style.display = "none";
+
+document.getElementById("portalScreen")
+.style.display = "flex";
+
 }
+
+/* VERIFY PRODUCT */
+
 function verifyProduct(){
 
-  let code =
-  document.getElementById("verifyInput")
-  .value.trim().toUpperCase();
+let code =
+document.getElementById("verifyInput")
+.value
+.trim()
+.toUpperCase();
 
-  let box =
-  document.getElementById("resultBox");
+let box =
+document.getElementById("resultBox");
 
-  /* VALID CODE */
+/* VALID CODE */
 
-  if(products[code]){
+if(products[code]){
 
-    let used =
-    parseInt(
-      localStorage.getItem("used_"+code)
-    ) || 0;
+let used =
+parseInt(
+localStorage.getItem("used_"+code)
+) || 0;
 
-    /* LIMIT REACHED */
+/* LIMIT */
 
-    if(used >= 2){
+if(used >= 2){
 
-      box.innerHTML =
-      "⚠️ ALREADY USED";
+box.innerHTML =
+"⚠️ ALREADY USED";
 
-      box.style.color =
-      "#ffcc00";
+box.style.color =
+"#ffcc00";
 
-    }
+}
 
-    /* VERIFIED */
+/* VERIFIED */
 
-    else{
+else{
 
-      used++;
+used++;
 
-      localStorage.setItem(
-        "used_"+code,
-        used
-      );
+localStorage.setItem(
+"used_"+code,
+used
+);
 
-      box.innerHTML =
-      "✅ VERIFIED - " +
-      products[code].brand +
-      " (" + used + "/2)";
+box.innerHTML =
+"✅ VERIFIED - " +
+products[code].brand +
+" (" + used + "/2)";
 
-      box.style.color =
-      "#00ff00";
-
-    }
-
-  }
-
-  /* INVALID */
-
-  else{
-
-    box.innerHTML =
-    "❌ INVALID CODE";
-
-    box.style.color =
-    "red";
-
-  }
-
-  /* AUTO CLEAR */
-
-  document.getElementById(
-    "verifyInput"
-  ).value = "";
+box.style.color =
+"#00ff00";
 
 }
 
 }
+
+/* INVALID */
+
+else{
+
+box.innerHTML =
+"❌ INVALID CODE";
+
+box.style.color =
+"red";
+
+}
+
+/* AUTO CLEAR */
+
+document.getElementById("verifyInput")
+.value = "";
+
+}
+
 </script>
 
 </body>
