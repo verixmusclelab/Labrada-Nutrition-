@@ -253,12 +253,12 @@ if(products[code]){
 
 let used =
 parseInt(
-localStorage.getItem("used_"+code)
+sessionStorage.getItem("used_"+code)
 ) || 0;
 
 /* LIMIT */
 
-if(used >= 20){
+if(used >= 2){
 
 box.innerHTML =
 "⚠️ ALREADY USED";
@@ -274,7 +274,7 @@ else{
 
 used++;
 
-localStorage.setItem(
+sessionStorage.setItem(
 "used_"+code,
 used
 );
@@ -286,7 +286,7 @@ products[code].brand +
 "Thank You For Choosing<br>" +
 products[code].brand +
 "<br><br>" +
-"Usage: " + used + "/20";
+"Usage: " + used + "/2";
 
 box.style.color =
 "#00ff00";
