@@ -7,18 +7,24 @@
     <style>
         * { margin:0; padding:0; box-sizing:border-box; font-family:Arial,sans-serif; }
         body { background:#0b0b0b; color:white; min-height:100vh; }
+        
+        /* Screens */
         #verifiedScreen { display:flex; justify-content:center; align-items:center; height:100vh; padding:20px; }
-        .verify-card { background:#111; padding:40px 25px; border-radius:30px; width:100%; max-width:430px; text-align:center; border:3px solid #00ff00; box-shadow:0 0 30px rgba(0,255,0,.25); }
-        .brand-name { font-size:34px; font-weight:bold; color:#ffcc00; margin-bottom:15px; }
-        .icon { font-size:70px; margin-bottom:15px; }
-        .verify-title { font-size:30px; font-weight:bold; color:#00ff00; margin-bottom:12px; }
-        .open-btn { background:#ffcc00; color:black; border:none; padding:16px; width:100%; border-radius:14px; font-size:18px; font-weight:bold; cursor:pointer; }
         #portalScreen { display:none; padding:30px 20px; min-height:100vh; }
-        .portal-card { max-width:500px; margin:auto; background:#111; padding:35px 25px; border-radius:30px; border:2px solid #ffcc00; text-align:center; }
-        .portal-brand { font-size:36px; font-weight:bold; color:#ffcc00; margin-bottom:10px; }
-        .verify-input { width:100%; padding:16px; border:none; border-radius:15px; font-size:18px; margin-bottom:15px; text-align:center; }
-        .verify-btn { width:100%; padding:16px; border:none; border-radius:15px; background:#ffcc00; font-size:18px; font-weight:bold; cursor:pointer; }
-        #resultBox { display:none; margin-top:20px; padding:20px; border-radius:20px; font-size:18px; font-weight:bold; }
+        
+        /* Cards */
+        .verify-card, .portal-card { background:#111; padding:40px 25px; border-radius:30px; width:100%; max-width:430px; text-align:center; border:2px solid #ffcc00; }
+        
+        .brand-name { font-size:32px; font-weight:bold; color:#ffcc00; margin-bottom:15px; }
+        .icon { font-size:60px; margin:15px 0; }
+        .verify-title { font-size:28px; font-weight:bold; color:#00ff00; margin-bottom:10px; }
+        
+        .code-box { background:#181818; border:2px dashed #ffcc00; padding:20px; border-radius:20px; margin:20px 0; }
+        .verify-input { width:100%; padding:15px; border:none; border-radius:12px; margin-bottom:15px; text-align:center; font-size:16px; }
+        .verify-btn { width:100%; padding:15px; border:none; border-radius:12px; background:#ffcc00; font-weight:bold; cursor:pointer; }
+        
+        #resultBox { display:none; margin-top:20px; padding:15px; border-radius:15px; font-weight:bold; }
+        .open-btn { background:#ffcc00; border:none; padding:15px; width:100%; border-radius:12px; font-weight:bold; cursor:pointer; }
     </style>
 </head>
 <body>
@@ -34,7 +40,14 @@
 
 <div id="portalScreen">
     <div class="portal-card">
-        <div class="portal-brand">LABRADA NUTRITION</div>
+        <div class="brand-name">LABRADA NUTRITION</div>
+        <div style="color:#bbb; margin-bottom:15px;">AUTHENTICATION PORTAL</div>
+        
+        <div class="code-box">
+            <div style="font-size:14px; color:#aaa;">Manual Verification Code</div>
+            <div id="displayCode" style="font-size:24px; color:#00ff00; margin-top:8px;">---</div>
+        </div>
+
         <input type="text" id="verifyInput" class="verify-input" placeholder="Enter Product Code">
         <button class="verify-btn" onclick="verifyProduct()">VERIFY PRODUCT</button>
         <div id="resultBox"></div>
@@ -47,6 +60,14 @@
         "LMG5P62C": "LABRADA NUTRITION",
         "TRU5MP91": "MUSCLETECH",
         "ON84P2X": "OPTIMUM NUTRITION"
+    };
+
+    window.onload = function() {
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get("code");
+        if (code && products[code.toUpperCase()]) {
+            document.getElementById("displayCode").innerText = code.toUpperCase();
+        }
     };
 
     function openPortal() {
@@ -64,18 +85,18 @@
             let key = "usage_" + code;
             let count = parseInt(localStorage.getItem(key)) || 0;
 
-            if (count < 2) {
+            if (count < 3) {
                 count++;
                 localStorage.setItem(key, count);
-                result.innerHTML = "✅ PRODUCT VERIFIED<br><br>Brand: " + products[code] + "<br>Used: " + count + "/2";
-                result.style.background = "#002b00"; result.style.color = "#00ff00"; result.style.border = "2px solid #00ff00";
+                result.innerHTML = "✅ PRODUCT VERIFIED<br>Authentic Product<br>Used: " + count + "/2";
+                result.style.background = "#002b00"; result.style.color = "#00ff00"; result.style.border = "1px solid #00ff00";
             } else {
-                result.innerHTML = "⚠️ ALERT: CODE ALREADY USED<br><br>Limit exceeded (2/2)";
-                result.style.background = "#2b0000"; result.style.color = "#ffcc00"; result.style.border = "2px solid #ffcc00";
+                result.innerHTML = "⚠️ ALERT: CODE ALREADY USED<br>Limit reached (2/2)";
+                result.style.background = "#2b0000"; result.style.color = "#ffcc00"; result.style.border = "1px solid #ffcc00";
             }
         } else {
             result.innerHTML = "❌ INVALID CODE";
-            result.style.background = "#2b0000"; result.style.color = "red"; result.style.border = "2px solid red";
+            result.style.background = "#2b0000"; result.style.color = "red"; result.style.border = "1px solid red";
         }
         input.value = "";
     }
