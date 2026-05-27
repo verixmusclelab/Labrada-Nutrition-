@@ -99,6 +99,7 @@ margin-top:15px;
 font-weight:bold;
 font-size:18px;
 min-height:40px;
+line-height:1.6;
 }
 
 </style>
@@ -183,10 +184,9 @@ const products = {
 
 /* QR AUTO DETECT */
 
-
 window.onload = function(){
 
-/* RESET OLD SESSION */
+/* RESET SESSION */
 
 sessionStorage.clear();
 
@@ -195,6 +195,8 @@ new URLSearchParams(window.location.search);
 
 const code =
 params.get("code");
+
+/* VALID QR */
 
 if(code && products[code.toUpperCase()]){
 
@@ -209,7 +211,7 @@ document.getElementById("scanBrand")
 document.getElementById("portalBrand")
 .innerText = p.brand;
 
-/* MANUAL CODE */
+/* CODE */
 
 document.getElementById("displayCode")
 .innerText = code.toUpperCase();
@@ -226,6 +228,59 @@ document.getElementById("scanBrand")
 }
 
 };
+
+/* OPEN WEBSITE */
+
+function openPortal(){
+
+document.getElementById("verifiedScreen")
+.style.display = "none";
+
+document.getElementById("portalScreen")
+.style.display = "flex";
+
+}
+
+/* VERIFY PRODUCT */
+
+function verifyProduct(){
+
+let code =
+document.getElementById("verifyInput")
+.value
+.trim()
+.toUpperCase();
+
+let box =
+document.getElementById("resultBox");
+
+/* VALID CODE */
+
+if(products[code]){
+
+let used =
+parseInt(
+sessionStorage.getItem("used_"+code)
+) || 0;
+
+/* LIMIT */
+
+if(used >= 2){
+
+box.innerHTML =
+"⚠️ ALREADY USED";
+
+box.style.color =
+"#ffcc00";
+
+}
+
+/* VERIFIED */
+
+else{
+
+used++;
+
 sessionStorage.setItem(
 "used_"+code,
 used
