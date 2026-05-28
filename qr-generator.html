@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Labrada QR PDF</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <button onclick="generatePDF()">Download All QR Codes as PDF</button>
+    <div id="qr-container" style="display:none;"></div>
+
+    <script>
+        const codes = ["LBR6V2P7", "LMG3K9W1", "LBR8Q5X4", "LMG1T7N6", "LBR4M2C9", "LMG9P5Q3", "LBR7W1K8", "LMG2X6T4", "LBR5N9P1", "LMG8Q3W7", "LBR1C6X5", "LMG4T8M2", "LBR9K1Q7", "LMG5P4N8", "LBR2W7X3", "LMG6Q1T9", "LBR8M5P2", "LMG3C7K4", "LBR4X9N1", "LMG7T2Q6", "LBR5P8W3", "LMG1M4X7", "LBR9Q2K5", "LMG8N6P1", "LBR3T7C4", "LMG4W1Q9", "LBR6X5M2", "LMG2P8K7", "LBR1N4T6", "LMG9Q7W3", "LBR7C2P8", "LMG5X1N4", "LBR8K6Q9", "LMG3T5W2", "LBR4P1M7", "LMG6Q8X3", "LBR2N5K1", "LMG1W7P9", "LBR9T4C6", "LMG8M2Q5", "LBR3X7N1", "LMG4P6W8", "LBR5Q1K3", "LMG7T9X2", "LBR1M8P4", "LMG2C5Q7", "LBR6W9N3", "LMG3X1K8", "LBR4T7Q2", "LMG5P9M6"];
+
+        async function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            let y = 10;
+
+            for (let i = 0; i < codes.length; i++) {
+                const qrDiv = document.createElement("div");
+                new QRCode(qrDiv, "https://saurabhsingh16215-ux.github.io/Labrada-Nutrition-/?code=" + codes[i]);
+                
+                const imgData = qrDiv.querySelector("img").src;
+                doc.text("Code: " + codes[i], 10, y);
+                doc.addImage(imgData, 'PNG', 10, y + 5, 30, 30);
+                
+                y += 40;
+                if (y > 250) { doc.addPage(); y = 10; }
+            }
+            doc.save("Labrada_QR_Codes.pdf");
+        }
+    </script>
+</body>
+</html>
+
